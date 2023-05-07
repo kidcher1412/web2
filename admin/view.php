@@ -750,6 +750,18 @@ echo "
                         </div>
                         <div class='content table-responsive table-full-width' id='id1'>
                             <table class='table table-hover table-striped'>
+                            <thead>
+                            <th>Mã hóa đơn</th>
+                            <th>Mã khách hàng</th>
+                            <th>Mã nhân viên</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>                                
+                            <th>Ngày đặt</th>
+                            <th>Ngày nhận</th>
+                            <th>Thành tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                            </thead>
 ";
         if($BillData!=false){
             foreach ($BillData as $value) {
@@ -772,18 +784,6 @@ echo "
                 <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='ViewCTHD(".$value["bill_id"].")'><i class='pe-7s-look'></i></button>
                 ";
                 echo "
-                <thead>
-                <th>Mã hóa đơn</th>
-                <th>Mã khách hàng</th>
-                <th>Mã nhân viên</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>                                
-                <th>Ngày đặt</th>
-                <th>Ngày nhận</th>
-                <th>Thành tiền</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-                </thead>
                 <tbody id='suahd1'> 
                 <tr>
                 <td>".$value["bill_id"]."</td>

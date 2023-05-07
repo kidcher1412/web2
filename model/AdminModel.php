@@ -230,6 +230,10 @@
         $classNCC = new NCCModel();
         return $classNCC->getNCC_ByID($id);
     }
+    public function getAllNCC(){
+        $classNCC = new NCCModel();
+        return $classNCC->getNCC();
+    }
     public function editNCC($ncc_id,$name,$address){
         $classNCC = new NCCModel();
         return $classNCC->editNCC($ncc_id,$name,$address);

@@ -208,6 +208,10 @@
         $class->getNCC_ByID($_POST['ncc_id']);
         exit();
     }
+    if(isset($_POST["action"])&&$_POST["action"]=="getAllNCC"){
+        $class->getAllNCC();
+        exit();
+    }
     if(isset($_POST["action"])&&$_POST["action"]=="editNCC"){
         $class->editNCC($_POST['ncc_id'],$_POST['name'],$_POST['address']);
         exit();

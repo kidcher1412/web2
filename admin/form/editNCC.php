@@ -39,6 +39,7 @@
         </div>
     </div>
     <script>
+        var data;
     function ThemNCC(){
         $('.form-group span').text('');
         $('#title-modal').html('Thêm nhà cung cấp');
@@ -95,20 +96,22 @@
         var type = $('#select').val();
         var input = $('#input_search').val();
         $.ajax({
-            url: '/Admin/NCC/TimKiem',
+            url: './index.php',
             type: 'post',
-            dataType: 'json',
             data: {
-                type: type,
-                input: input
+                action: "getAllNCC"
             },
-            success: function (data) {
-                if (data != -1) {
+            success: function (responseText) {
+                data = JSON.parse(responseText);
+                console.log(data);
+                if (data != false) {
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
                         s += `<tr>
                                     <td>`+ data[i].ncc_id +`</td>
-                                    <td>`+ data[i].name +`</td>`;
+                                    <td>`+ data[i].name +`</td>
+                                    <td>`+ data[i].address +`</td>
+                                    `;
                                     if(data[i].status == 1){
                                         s += `<td>Hiện</td>`;
                                     }

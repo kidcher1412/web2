@@ -248,6 +248,11 @@
             $ncc = $user->getNCC_ByID($id);
             echo json_encode($ncc);
         }
+        public function getAllNCC(){
+            $user = new Admin;
+            $ncc = $user->getAllNCC();
+            echo json_encode($ncc);
+        }
         public function editNCC($ncc_id,$name,$address){
             $user = new Admin;
             $ncc = $user->editNCC($ncc_id,$name,$address);
