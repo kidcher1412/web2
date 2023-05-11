@@ -155,6 +155,10 @@
             $classProduct = new ProductModel();
             return $classProduct->removeType($type_id);
         }
+        public function backupType($type_id) {
+            $classProduct = new ProductModel();
+            return $classProduct->backupType($type_id);
+        }
         // Brand - stack 
         public function getBrand_ByID($brand_id) {
             $classProduct = new ProductModel();
@@ -171,6 +175,10 @@
         public function removeBrand($brand_id) {
             $classProduct = new ProductModel();
             return $classProduct->removeBrand($brand_id);
+        }
+        public function backupBrand($brand_id) {
+            $classProduct = new ProductModel();
+            return $classProduct->backupBrand($brand_id);
         }
         // permission - stack
         public function getPermission_ByID($permission_id) {
@@ -283,6 +291,10 @@
     public function getValueThongKe(){
         $classNCC = new BillModel;
         return $classNCC->getValueThongKe();
+    }
+    public function getValueThongKe2($checkertime,$typeproduct,$amounter){
+        $classNCC = new BillModel;
+        return $classNCC->getValueThongKe2($checkertime,$typeproduct,$amounter);
     }
 
 }

@@ -15,8 +15,8 @@
                         <div class="footer-social">
                             <a href="https://www.facebook.com/thongpacom"><i class="fa-brands fa-facebook"></i></i></a>
                             <a href="https://github.com/kidcher1412"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://www.youtube.com/channel/UCcTlzWqdHnOx3rSAbEw6ULg"><i class="fa-brands fa-youtube"></i></a>
-                            <a href="../mycv/"><i class="fa-sharp fa-regular fa-code"></i></a>
+                            <a href="../mycv/"><i class="fa-brands fa-youtube"></i></a>
+                            <!-- <a href="../mycv/"><i class="fa-thin fa-shop"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="footer-widget">
                         <h5>Cửa hàng</h5>
                         <ul>
-                            <li><a href="/Shop/Index">Cửa hàng</a></li>
+                            <li><a href="../home/shop.php">Cửa hàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
                     <div class="footer-widget">
                         <h5>Tài khoản</h5>
                         <ul>
-                            <li><a href="/User/Index">Tài khoản của tôi</a></li>
-                            <li><a href="/User/Detail">Thông tin cá nhân</a></li>
-                            <li><a href="/User/MyOrder">Đơn hàng</a></li>
+                            <li><a href="../home/profile.php">Tài khoản của tôi</a></li>
+                            <li><a href="../home/profile.php">Thông tin cá nhân</a></li>
+                            <li><a href="../home/profile.php?typeview=4">Đơn hàng</a></li>
                         </ul>
                     </div>
                 </div>

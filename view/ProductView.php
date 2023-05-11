@@ -1,7 +1,7 @@
 <?php 
     ob_start(); // start output buffering
     $ProductID = empty($_GET["product_id"]) ? 1: $_GET["product_id"];
-    if($ProductID == 0) {
+    if($ProductID == 0||$productInfo==false) {
         header("Location:../page/404.php");
         return;
     } 

@@ -1,5 +1,6 @@
 <?php 
 require_once('../model/HeroModel.php');
+require_once('../model/ProductModel.php');
 
 class Home {
     private $db;
@@ -9,6 +10,8 @@ class Home {
     public function index() {
       $heroclass = new HeroModel();
       $heroData = $heroclass->getHero(); // Thêm mảng kết quả vào mảng output
+      $categoryclass = new ProductModel();
+      $categoryData = $categoryclass->getType();
       // retrieve user data from model
       // load view and pass user data to it
       // include('../view/UserView.php');

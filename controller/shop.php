@@ -8,6 +8,8 @@
          }
          public function index() {
             $shopmodel = new ShopModel();
+            $categoryclass = new ProductModel();
+            $categoryData = $categoryclass->getType();
             include('../page/header.php');
             include('../view/ShopView.php');
             include('../view/BannerView.php');

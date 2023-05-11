@@ -189,6 +189,45 @@
             }
         });
     }
+    function BackupBrand(brand_id){
+        Swal.fire({
+            type: 'question',
+            title: 'Xác nhận',
+            text: 'Bạn có muốn mở khóa các thương hiệu và tất cả các sản phẩm thuộc thương hiệu này?',
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'POST',
+                    url: './index.php',
+                    data: {
+                        action: 'backupBrand',
+                        brandID: brand_id
+                    },
+                    success: (response) => {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'khôi phục Thương Hiệu và Sản Phẩm Thành Công',
+                            html: response
+                        }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi mở khóa sản phẩm',
+                            html: e.responseText
+                        });
+                    }
+                })
+            }
+        });
+    }
     function ThemTH(){
         $('#title-modal').html('Thêm thương hiệu');
         $('#myModal').modal();

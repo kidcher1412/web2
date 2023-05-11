@@ -128,6 +128,11 @@
             $ProductgetData = $user->removeType($type_id);
 
         }
+        public function backupType($type_id){
+            $user = new Admin();
+            $ProductgetData = $user->backupType($type_id);
+
+        }
         public function getBrand_ByID($brand_id){
             $user = new Admin();
             echo json_encode($user->getBrand_ByID($brand_id));
@@ -151,6 +156,11 @@
         public function removeBrand($brand_id){
             $user = new Admin();
             echo json_encode($user->removeBrand($brand_id));
+
+        }
+        public function backupBrand($brand_id){
+            $user = new Admin();
+            echo json_encode($user->backupBrand($brand_id));
 
         }
 
@@ -309,6 +319,11 @@
         public function getValueThongKe(){
             $user = new Admin;
             $output= $user->getValueThongKe();
+            echo json_encode($output);
+        }
+        public function getValueThongKe2($checkertime,$typeproduct,$amounter){
+            $user = new Admin;
+            $output= $user->getValueThongKe2($checkertime,$typeproduct,$amounter);
             echo json_encode($output);
         }
     }

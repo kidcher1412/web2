@@ -1,5 +1,5 @@
 <?php
-        if($typeview>13){
+        if($typeview>14){
             include "./page/permission404.php";
             // echo 'Không Đủ Thẩm Quyền Truy Cập';
             include "./page/footer.php";
@@ -234,7 +234,7 @@
                                     <td>".$value["product_type_id"]."</td>
                                     <td>".$value["brand_id"]."</td>
                                     <td>".$value["amount"]."</td>
-                                    <td>".$value["price"]."</td>
+                                    <td>".number_format($value["price"], 0, ',', '.')." đ"."</td>
                                     <td title='".$value["description"]."'>".$valuedescription."</td>
                                     <td title='".$value["use"]."'>".$valueuse."</td>
                                         <td>$status</td>
@@ -313,8 +313,11 @@
                 if($permissionList[$checkpoint]['valueedit']!='0')
                     echo "<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditLSP(".$value["product_type_id"].")'><i class='pe-7s-config'></i></button>";
                 if($permissionList[$checkpoint]['valuedelete']!='0'){
-                    echo "<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveLSP(".$value["product_type_id"].")'><i class='pe-7s-trash'></i></button>";
-                }
+                    if($value["status"]!=0)
+                        echo "<button data-toggle='tooltip' title='' class='pd-setting-ed'style='background-color: green;' data-original-title='Trash' onclick='RemoveLSP(".$value["product_type_id"].")'><i style='color:white'class='pe-7s-lock'></i></button>";
+                    else
+                    echo "<button data-toggle='tooltip' title='' class='pd-setting-ed'style='background-color: red;' data-original-title='Trash' onclick='BackupLSP(".$value["product_type_id"].")'><i style='color:white' class='pe-7s-unlock'></i></button>";
+                    }
                 echo "
                 </td>
             </tr>
@@ -374,8 +377,13 @@
                 <td>";
                 if($permissionList[$checkpoint]['valueedit']!='0')
                     echo "<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditBrand(".$value["brand_id"].")'><i class='pe-7s-config'></i></button>";
-                if($permissionList[$checkpoint]['valuedelete']!='0')
-                    echo " <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveBrand(".$value["brand_id"].")'><i class='pe-7s-trash'></i></button>";
+                if($permissionList[$checkpoint]['valuedelete']!='0'){
+                    if($value["status"]!=0||$value["status"]==null)
+                        echo " <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' style='background-color: green;' onclick='RemoveBrand(".$value["brand_id"].")'><i style='color:white' class='pe-7s-unlock' class='pe-7s-trash'></i></button>";
+                    else
+                        echo " <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' style='background-color: red;' onclick='BackupBrand(".$value["brand_id"].")'><i style='color:white' class='pe-7s-unlock' class='pe-7s-trash'></i></button>";
+                }
+                    
                 echo"
                 </td>
             </tr>
@@ -762,6 +770,7 @@ echo "
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                             </thead>
+                            <tbody id='suahd1'> 
 ";
         if($BillData!=false){
             foreach ($BillData as $value) {
@@ -784,7 +793,6 @@ echo "
                 <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='ViewCTHD(".$value["bill_id"].")'><i class='pe-7s-look'></i></button>
                 ";
                 echo "
-                <tbody id='suahd1'> 
                 <tr>
                 <td>".$value["bill_id"]."</td>
                 <td>".$value["user_kh"]."</td>
@@ -883,6 +891,9 @@ echo "
                     if (data.length>0)
                         data.forEach(element => {
                             var status;
+                            var status1='';
+                            if(element.status<3)
+                                status1 = `<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Edit' data-target='#myModal' onclick='EditHD(3)'><i class='pe-7s-config'></i></button>`;
                             const total = parseInt(element.total).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
                             if(element.user_nv==null) element.user_nv='';
                             switch (element.status) {
@@ -914,7 +925,7 @@ echo "
                                 <td>`+status+`</td>
                                 
                                 <td>
-                                    <button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Edit' data-target='#myModal' onclick='EditHD(3)'><i class='pe-7s-config'></i></button>
+                                `+status1+`
                                         <button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Trash' onclick='ViewCTHD(3)'><i class='pe-7s-look'></i></button>
                                 </td>
                             </tr>
@@ -1068,6 +1079,8 @@ echo "
     if ($typeview == 12)
         echo 'trang Hỗ trợ khách hàng';
     if ($typeview == 13)
+    include './page/testchap1.php';
+    if ($typeview == 14)
         include './page/test.php';
 ?>
 

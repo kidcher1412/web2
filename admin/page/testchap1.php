@@ -60,6 +60,11 @@
                     <option checked value="giam-loinhuan">Giảm Dần Theo Doanh Số</option>
                     <option value="tang-loinhuan">Tăng Dần Theo Doanh Số</option>
                   </select>
+                  <br>
+                  <input type="number" style="width: 50px;" id="chisobanra" name="chisobanra" min="0" onchange="DrawChart()" placeholder="chỉ số bán ra">
+                  <label style="cursor: pointer;" for="chisobanra">chỉ hiện mức bán ra theo chỉ sổ bán ra của sản phẩm</label>
+                  <!-- <input type="checkbox" id="checkbanra" name="checkbanra" onchange="DrawChart()"> -->
+                  <br>
                   <input type="number" style="width: 50px;" id="chisobaodong" name="chisobaodong" onchange="DrawChart()" value="20" placeholder="chỉ số báo động">
                   <label style="cursor: pointer;" for="checksoluong">Hiện Mức Báo Động Kho</label>
                   <input type="checkbox" id="checksoluong" name="checksoluong" onchange="DrawChart()">
@@ -108,8 +113,8 @@
               <table class="table table-striped table-valign-middle bill-top">
                   <thead>
                   <tr>
-                    <th>Số Lượng Hóa Đơn</th>
                     <th>Thời Gian Lập Hóa Đơn</th>
+                    <th>Số Lượng các sản phẩm bán ra</th>
                     <th>Tổng Tiền Hóa Đơn</th>
                     <!-- <th>test</th> -->
                   </tr>
@@ -208,29 +213,51 @@
   let DoanhThu=[];
   let SoluongDaBan = 0;
   let SoTienDaBan = 0;
+  let resultArray=[]; //hóa đơn thời gian
+  var amountByProductIdOutput=[];    // sản phẩm số lượng
+  var aggregatedBrands = [];
+  var maxCheckAmount;
+  function geterdate(x) {
+    // Chuyển đổi định dạng ngày tháng
+    const parts = x.split("-"); // Tách chuỗi theo dấu "-"
+    const newDateStr = parts[2] + "-" + parts[1] + "-" + parts[0]; // Gộp lại theo định dạng "dd-mm-yyyy"
+
+    // Hiển thị kết quả
+    return newDateStr; // Kết quả là "01-05-2023"
+  }
   window.onload = function() {
     $.ajax({
         type: 'POST',
         url: './index.php',
         data:{
-            action: "getThongKe",
+            action: "getThongKever2",
         },
         success: function(responseText) {
-            DoanhThu =JSON.parse(responseText);
+            resultArray = JSON.parse(responseText).hoadonthoigian;
+            amountByProductIdOutput = JSON.parse(responseText).sanpham;
+            aggregatedBrands = JSON.parse(responseText).thuonghieu;
+            maxCheckAmount = amountByProductIdOutput.reduce((max, item) => Math.max(max, item.amount), 0);
             DrawChart();
         }})
     }
-  function ThongKe(){
+  async function ThongKe(){
     var minday = document.querySelector("#datezoneMin").value;
     var maxday = document.querySelector("#datezoneMax").value;
-    $.ajax({
+    await $.ajax({
         type: 'POST',
         url: './index.php',
         data:{
-            action: "getThongKe",
+            action: "getThongKever2",
+            timer: geterdate(document.querySelector("#datezoneMin").value)+","+geterdate(document.querySelector("#datezoneMax").value),
+            typeproduct: document.querySelector("#select-product").value,
+            amounter:document.querySelector("#chisobanra").value==null?"":document.querySelector("#chisobanra").value
         },
         success: function(responseText) {
-            DoanhThu =JSON.parse(responseText);
+            // var resultArray = [{monthyear: '04-2023', price: 34145000, countbill: 1},{monthyear: '05-2023', price: 3416000, countbill: 1}];
+            resultArray = JSON.parse(responseText).hoadonthoigian;
+            amountByProductIdOutput = JSON.parse(responseText).sanpham;
+            aggregatedBrands = JSON.parse(responseText).thuonghieu;
+            maxCheckAmount = amountByProductIdOutput.reduce((max, item) => Math.max(max, item.amount), 0);
             // DrawChart();
         }})
   }
@@ -255,156 +282,27 @@ document.querySelector("#datezoneMin").value = year+"-01-01";
   function getValueChart(){
     
   }
-  function DrawChart(){
-    ThongKe();
+  async function DrawChart(){
+    await ThongKe();
     SoTienDaBan = 0;
     const filteredData = {};
     SoluongDaBan=0;
     const core = DoanhThu;
-    var amountByProductIdOutput=[];
     const daymax = document.querySelector("#datezoneMax").value;
     const daymin = document.querySelector("#datezoneMin").value;
-    if(document.getElementById("checksoluong").checked){
-      DoanhThu = DoanhThu.filter(item => {
-        return parseInt(item.soluongton)<=document.getElementById("chisobaodong").value;
-      })
-    }
-    DoanhThu = DoanhThu.filter(item => {
-      const date = new Date(item.date_order.split('-').reverse().join('-'));
-      return date > new Date(daymin) && date <= new Date(daymax);
-    });
-    switch (document.getElementById("select-product").value) {
-      case "all":
-        break;
-      default:
-      DoanhThu = DoanhThu.filter(item => parseInt(item.product_type_id) == document.getElementById("select-product").value)
-        break;
-    }
-    DoanhThu.forEach(element => {
-              SoTienDaBan+=parseInt(element.total)
-    });
-
-        // Xử Lý Dữ Liệu Trước Khi vào Biểu Đồ
-  const groupedData = DoanhThu.reduce((acc, curr) => {
-    const [day, month, year] = curr.date_order.split('-');
-    const key = `${month}-${year}-${curr.product_id}`;
-    
-    if (!acc[key]) {
-      acc[key] = {
-        month,
-        year,
-        price: parseInt(curr.price),
-      };
-    } else {
-      acc[key].price += parseInt(curr.price);
-    }
-
-    return acc;
-  }, {});
-
-const group = Object.values(groupedData);
-
-const countUniqueBillsByDate = (DoanhThu) => {
-  const counts = {};
-  DoanhThu.forEach((item) => {
-    const monthYear = item.date_order.substr(3);
-    if (!counts[monthYear]) counts[monthYear] = {};
-    if (!counts[monthYear][item.bill_id]) counts[monthYear][item.bill_id] = 1;
-  });
-  return Object.entries(counts).map(([monthYear, bills]) => ({
-    monthYear,
-    countofBill: Object.keys(bills).length
-  }));
-};
-
-// console.log(countUniqueBillsByDate(DoanhThu)); 
-
-const result = new Map();
-for (const {month, year, price} of group) {
-  const key = `${month}-${year}`;
-  if (result.has(key)) {
-    const value = result.get(key);
-    result.set(key, { price: value.price + price, countbill: value.countbill + 1 });
-  } else {
-    result.set(key, { price, countbill: 1 });
-  }
-}
-
-const resultArray = [];
-let countbill=0;
-for (const [key, value] of result) {
-  resultArray.push({ 'monthyear': key, price: value.price, 'countbill': countUniqueBillsByDate(DoanhThu)[countbill].countofBill });
-  countbill++;
-}
-
-console.log(resultArray);
-
-let dataBillView=[];
-    switch (document.querySelector("#select-bill-type").value) {
-      case "bill-by-month":
-        dataBillView=resultArray;
-        document.querySelector("#bill-scale").innerHTML=''
-        dataBillView.forEach(element => {
-          document.querySelector("#bill-scale").innerHTML+=`
-                  <tr>
-                    <td>${parseInt(element.countbill)}</td>
-                    <td>${element.monthyear}</td>
-                    <td>${parseInt(element.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-                  </tr>
-          `;
-        });
-        break;
-      case "bill-by-id":
-        dataBillView=resultArray;
-        document.querySelector("#bill-scale").innerHTML=''
-        dataBillView.forEach(element => {
-          document.querySelector("#bill-scale").innerHTML+=`
-            bill
-          `;
-        });
-        break;
-      default:
-        break;
-    }
-
-  filteredDataArray = resultArray
+    document.querySelector("#chisobanra").value = parseInt(maxCheckAmount)
 
 
-    console.log(filteredDataArray)
-    
-    const products = {};
-    for (let item of DoanhThu) {
-      if (products[item.product_id]) {
-        products[item.product_id].amount += parseInt(item.amount);
-        products[item.product_id].price += parseInt(item.price);
-      } else {
-        products[item.product_id] = {
-          amount: parseInt(item.amount),
-          price: parseInt(item.price),
-          image: item.image,
-          soluongton: item.soluongton,
-          name_sp: item.tensanpham,
-        };
-      }
-    }
-
-    amountByProductIdOutput = Object.entries(products).map(([key, value]) => ({product_id: key, ...value}));
-    
-
-
-    var temp = 0;
-    amountByProductIdOutput.forEach(element => {
-      temp+=element.amount;
-    });
-    document.querySelector(".soluongdaban").innerHTML = temp;
-    // Tạo biểu đồ
-    let labels = filteredDataArray.map(item => item.monthyear);
-    let data = filteredDataArray.map(item => item.price);
 
     let ctx = document.getElementById('visitors-chart').getContext('2d');
-
-    // Xóa Biểu Đồ Cũ
+    //biến doanh thu theo thời gian
+    console.log(resultArray);
+    // resultArray = []; //lập trạng thái giả dữ liệu không có
+        // Tạo biểu đồ
+    let labels = resultArray.map(item => item.monthyear);
+    let data = resultArray.map(item => item.price);
     var oldChart = Chart.getChart("visitors-chart");
+    // Xóa Biểu Đồ Cũ
     if (oldChart) {
       oldChart.destroy();
     }
@@ -412,7 +310,6 @@ let dataBillView=[];
     if (oldChart) {
       oldChart.destroy();
     }
-
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -438,8 +335,19 @@ let dataBillView=[];
         }
       }
     });
-  console.log(amountByProductIdOutput)
+
+    
     document.querySelector("#thongkesoluongban").innerHTML="";
+    switch (document.getElementById("select-product").value) {
+      case "all":
+        break;
+      default:
+      amountByProductIdOutput = amountByProductIdOutput.filter(item => parseInt(item.product_type_id) == document.getElementById("select-product").value)
+        break;
+    }
+    DoanhThu.forEach(element => {
+              SoTienDaBan+=parseInt(element.total)
+    });
     switch (document.getElementById("select-product-type").value) {
       case "tang-soluong":
         amountByProductIdOutput.sort((a, b) => parseInt(a.amount) - parseInt(b.amount));
@@ -455,12 +363,24 @@ let dataBillView=[];
         break;
     }
     temp = 0
+    console.log(amountByProductIdOutput)
+    if(document.getElementById("checksoluong").checked){
+      amountByProductIdOutput = amountByProductIdOutput.filter(item => {
+        return parseInt(item.soluongton)<=document.getElementById("chisobaodong").value;
+      })
+    }
+    // if(document.getElementById("checkbanra").checked){
+    //   if(document.getElementById("chisobanra").value!="")
+    //   amountByProductIdOutput = amountByProductIdOutput.filter(item => {
+    //     return parseInt(item.amount)>=parseInt(document.getElementById("chisobanra").value);
+    //   })
+    // }
 amountByProductIdOutput.forEach(element => {
     temp +=parseInt(element.price);
     document.querySelector("#thongkesoluongban").innerHTML+=`
     <tr>
                       <td>
-                        <img style="max-width: 30px;max-height: 30px;object-fit: cover;" src="${element.image}" alt="Product" class="img-circle img-size-32 mr-2">
+                        <img style="max-width: 30px;max-height: 30px;object-fit: cover;" src="${element.img}" alt="Product" class="img-circle img-size-32 mr-2">
                         ${element.name_sp}
                       </td>
                       <td>
@@ -477,52 +397,15 @@ amountByProductIdOutput.forEach(element => {
     `
 
   });
+
   document.querySelector(".daban").innerHTML = "Tổng số doanh thu: "+parseInt(temp).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   document.querySelector(".sotiendaban").innerHTML = parseInt(temp).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
 
-  const priceByBrand = {};
-  const priceByBrandOutput = [];
-  for (let item of DoanhThu) {
-        if (priceByBrand[item.brand_id]) {
-          priceByBrand[item.tenthuonghieu] += parseInt(item.price);
-          const ojpush = {id_brand:item.brand_id,name_brand:item.tenthuonghieu,total:priceByBrand[item.tenthuonghieu]};
-          priceByBrandOutput.push(ojpush);
-        } else {
-          priceByBrand[item.tenthuonghieu] = parseInt(item.price);
-          const ojpush = {id_brand:item.brand_id,name_brand:item.tenthuonghieu,total:priceByBrand[item.tenthuonghieu]};
-          priceByBrandOutput.push(ojpush);
-        }
-      }
-      
-      const groupedBrands = new Map();
-      priceByBrandOutput.forEach(product => {
-        const { id_brand, name_brand, total } = product;
-        if (groupedBrands.has(id_brand)) {
-          const existingBrand = groupedBrands.get(id_brand);
-          groupedBrands.set(id_brand, { 
-            id_brand, 
-            name_brand, 
-            total: existingBrand.total + total 
-          });
-        } else {
-          groupedBrands.set(id_brand, { id_brand, name_brand, total });
-        }
-      });
 
-      const aggregatedBrands = Array.from(groupedBrands.values());
-
-      console.log(aggregatedBrands);
-      const maxTotal = Math.max(...aggregatedBrands.map(item => item.total));
-      let maxTotalItem = null;
-      maxTotalItem = aggregatedBrands.find(item => item.total === maxTotal);
-      if( typeof maxTotalItem != "undefined")
-        document.getElementById("bestsalerBrand").innerHTML = maxTotalItem.name_brand
-      else
-        document.getElementById("bestsalerBrand").innerHTML = "Không có Doanh Thu trong trường này";
+      // var aggregatedBrands = []; // lập trạng thái dữ liệu không có
       labels = aggregatedBrands.map(item => item.name_brand);
       values = aggregatedBrands.map(item => item.total);
       ctx = document.getElementById('sales-chart').getContext('2d');
-      console.log(aggregatedBrands)
       new Chart(ctx, {
         type: 'pie',
         data: {
@@ -563,6 +446,7 @@ amountByProductIdOutput.forEach(element => {
           }
         }
       });
+
       switch (document.getElementById("select-brand-type").value) {
       case "tang-id":
         aggregatedBrands.sort((a, b) => parseInt(a.id_brand) - parseInt(b.id_brand));
@@ -578,17 +462,43 @@ amountByProductIdOutput.forEach(element => {
         break;
     }
       document.querySelector("#thongkehoadon").innerHTML = "";
+      console.log(aggregatedBrands)
       aggregatedBrands.forEach(element => {
         const total = parseInt(element.total).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })
         document.querySelector("#thongkehoadon").innerHTML+=`
         <tr>
-          <td>${element.id_brand}</td>
+          <td>${element.brand_id}</td>
           <td>${element.name_brand}</td>
           <td>${total}</td>
           
         </tr>
-        `
+       `
       });
+        //vẽ bill sơ đồ
+    switch (document.querySelector("#select-bill-type").value) {
+      case "bill-by-month":
+        document.querySelector("#bill-scale").innerHTML=''
+        resultArray.forEach(element => {
+          document.querySelector("#bill-scale").innerHTML+=`
+                  <tr>
+                    <td>${element.monthyear}</td>
+                    <td>${parseInt(element.countbill)}</td>
+                    <td>${parseInt(element.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                  </tr>
+          `;
+        });
+        break;
+      case "bill-by-id":
+        document.querySelector("#bill-scale").innerHTML=''
+        resultArray.forEach(element => {
+          document.querySelector("#bill-scale").innerHTML+=`
+            bill
+          `;
+        });
+        break;
+      default:
+        break;
+    }
   }
 // lgtm [js/unused-local-variable]
 </script>

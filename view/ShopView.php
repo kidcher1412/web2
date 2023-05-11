@@ -36,12 +36,14 @@ $indexItem = $currentPage * $itemsPerPage;
                         $demcatelogry = 0;
                         foreach ($shopmodel->getType() as $value) {
                             $demcatelogry++;
-                            echo "
-                                    <li>
-                                        <input type='checkbox' class='checkerType' id='type" . $demcatelogry . "' style='cursor:pointer' onclick='reloadpageview(0)'>
-                                        <label for='type" . $demcatelogry . "' style='cursor:pointer'>" . $value["name"] . "</label>
-                                    </li>
-                                    ";
+                            if($value["status"]==0);
+                            else    
+                                echo "
+                                        <li>
+                                            <input type='checkbox' class='checkerType' id='" . $demcatelogry . "' style='cursor:pointer' onclick='reloadpageview(0)'>
+                                            <label for='type" . $demcatelogry . "' style='cursor:pointer'>" . $value["name"] . "</label>
+                                        </li>
+                                        ";
                         }
                         ?>
                     </ul>
@@ -57,14 +59,13 @@ $indexItem = $currentPage * $itemsPerPage;
                                         </label>
                                     </div> -->
                         <?php
-                        $dembrand = 0;
                         foreach ($shopmodel->getBrand() as $value) {
-                            $dembrand++;
+                            if( $value["status"]!=0)
                             echo "
                                     <div class='bc-item'>
-                                        <label for=$dembrand>
+                                        <label>
                                             " . $value["name"] . "
-                                            <input class='checkerBrand' type='checkbox' id=$dembrand onclick='reloadpageview(0)'>
+                                            <input class='checkerBrand' type='checkbox' id='".$value["brand_id"]."' onclick='reloadpageview(0)'>
                                             <span class='checkmark'></span>
                                         </label>
                                     </div>
@@ -276,16 +277,16 @@ $indexItem = $currentPage * $itemsPerPage;
         let ajaxBrand = '';
         for (let index = 0; index < typebox.length; index++) {
             if (typebox[index].checked)
-                ajaxType += (index + 1) + ","
+                ajaxType += (typebox[index].id) + ","
         }
         for (let index = 0; index < brandbox.length; index++) {
             if (brandbox[index].checked)
-                ajaxBrand += (index + 1) + ","
+                ajaxBrand += (brandbox[index].id) + ","
         }
-        if (ajaxType != "")
-            ajaxType = ajaxType.slice(0, -1);
-        if (ajaxBrand != "")
-            ajaxBrand = ajaxBrand.slice(0, -1);
+        // if (ajaxType != "")
+        //     ajaxType = ajaxType.slice(0, -1);
+        // if (ajaxBrand != "")
+        //     ajaxBrand = ajaxBrand.slice(0, -1);
         const searcher = document.querySelector("#valueSearcher").value != "" ? document.querySelector("#valueSearcher").value : "";
         const sorter = document.querySelector(".thien-sort").value;
         $.ajax({

@@ -192,12 +192,19 @@
                         <i class="ti-menu"></i>
                         <span>Danh mục</span>
                         <ul class="depart-hover">
-                                        <li><a href="/web2/home/shop.php?type=1">Trang &#x111;i&#x1EC3;m</a></li>
+                            <?php 
+                                foreach ($categoryData as $key => $value) {
+                                    $keyv=$key+1;
+                                    echo "<li><a href='/web2/home/shop.php?type=$keyv'>".$value["name"]."</a></li>";
+                                }
+                            
+                            ?>
+                                        <!-- <li><a href="/web2/home/shop.php?type=1">Trang &#x111;i&#x1EC3;m</a></li>
                                         <li><a href="/web2/home/shop.php?type=2">D&#x1B0;&#x1EE1;ng da</a></li>
                                         <li><a href="/web2/home/shop.php?type=3">C&#x1A1; th&#x1EC3;</a></li>
                                         <li><a href="/web2/home/shop.php?type=4">D&#x1B0;&#x1EE1;ng t&#xF3;c</a></li>
                                         <li><a href="/web2/home/shop.php?type=5">C&#x1ECD; v&#xE0; ph&#x1EE5; ki&#x1EC7;n</a></li>
-                                        <li><a href="/web2/home/shop.php?type=6">N&#x1B0;&#x1EDB;c hoa</a></li>
+                                        <li><a href="/web2/home/shop.php?type=6">N&#x1B0;&#x1EDB;c hoa</a></li> -->
                         </ul>
                     </div>
                 </div>

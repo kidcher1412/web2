@@ -25,7 +25,7 @@
 
             $query = "UPDATE `nccs` SET `name`='$name',`address`='$address' WHERE ncc_id='$ncc_id'";
                   try {
-                      if($result = $db->insert($query)){
+                      if($result = $db->update($query)){
                                echo json_encode(array('textRely' => 'success'));
                            
                       } else {
@@ -63,7 +63,7 @@
 
             $query = "UPDATE `nccs` SET `status`='0' WHERE ncc_id='$ncc_id'";
                   try {
-                      if($result = $db->insert($query)){
+                      if($result = $db->update($query)){
                                echo json_encode(array('textRely' => 'success'));
                            
                       } else {
@@ -82,7 +82,7 @@
 
             $query = "UPDATE `nccs` SET `status`='1' WHERE ncc_id='$ncc_id'";
                   try {
-                      if($result = $db->insert($query)){
+                      if($result = $db->update($query)){
                                echo json_encode(array('textRely' => 'success'));
                            
                       } else {

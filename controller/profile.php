@@ -2,12 +2,15 @@
     require_once("../model/BillModel.php");
     require_once('../model/ProfileModel.php');
     require_once('../model/UserModel.php');
+    require_once('../model/ProductModel.php');
+
     class Profile{
         public function index() {
             $classBill = new BillModel();
             $ProfileData = $this->getdata_user_login();
             $BillData=$classBill->getBill_ByUser($ProfileData["kh_user_id"]);
-            
+            $categoryclass = new ProductModel();
+            $categoryData = $categoryclass->getType();
             // echo json_encode($BillData);
             include('../page/header.php');
             include('../view/ProfileView.php');

@@ -39,6 +39,7 @@
         </div>
     </div>
     <script>
+    var data;
     function TimKiem(){
         var type = $('#select').val();
         var input = $('#input_search').val();
@@ -51,7 +52,7 @@
             },
             success: function (responseText) {
                 var s = 'Không tìm thấy dữ liệu';
-                var data = JSON.parse(responseText);
+                data = JSON.parse(responseText);
                 data = data.filter(order => {
                         const daymax = document.querySelector('#datezoneMax').value;
                         const daymin = document.querySelector('#datezoneMin').value;
@@ -79,6 +80,8 @@
                 if (data.length>0) {
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
+                        if(data[i].user_nv==null)
+                            data[i].user_nv ="";
                         s += `<tr>
                                     <td>`+ data[i].bill_id +`</td>
                                     <td>`+ data[i].user_kh +`</td>
@@ -110,7 +113,9 @@
                                 </tr>`;
                     }
                 }
-                $('#suahd1').html(s);
+                console.log(s)
+                document.querySelector('#suahd1').innerHTML="";
+                document.querySelector('#suahd1').innerHTML = s
             },
             error: function (e) {
                 Swal.fire({

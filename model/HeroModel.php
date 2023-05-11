@@ -25,7 +25,7 @@
 
             $query = "UPDATE `heros` SET `slogent`='$slogent',`img`='$img' WHERE id_hero='$hero_id'";
                   try {
-                      if($result = $db->insert($query)){
+                      if($result = $db->update($query)){
                                echo json_encode(array('textRely' => 'success'));
                            
                       } else {
@@ -63,7 +63,7 @@
 
             $query = "DELETE FROM `heros` WHERE id_hero='$hero_id'";
                   try {
-                      if($result = $db->insert($query)){
+                      if($result = $db->delete($query)){
                                echo json_encode(array('textRely' => 'success'));
                            
                       } else {

@@ -25,10 +25,11 @@
             }
             else{
                 $query = "SELECT carts.cart_id, sanphams.img, sanphams.name,sanphams.amount,sanphams.price,carts.amonut as 'cartAmount' FROM carts,accounts,sanphams WHERE carts.product_id = sanphams.product_id and carts.user_id = accounts.user_id and accounts.user = '$User'";
-                $result = $db->insert($query);
-                while($value = $result->fetch_assoc()) {
-                    $carts[] = $value; // Thêm mảng kết quả vào mảng output
-                }
+                $result = $db->select($query);
+                if($result)
+                    while($value = $result->fetch_assoc()) {
+                        $carts[] = $value; // Thêm mảng kết quả vào mảng output
+                    }
                 if(!empty($carts))
                     return $carts;
                 else
@@ -49,13 +50,11 @@
             if($result){
                 $query = "UPDATE carts SET carts.amonut  = carts.amonut+1 WHERE product_id = $product_id and user_id = $user_id ";
                 $db->update($query);
-                $modal = new Modal();
                 echo 'Update Thành Công Số Lượng Sản Phẩm trong giỏ hàng!';
             }
             else{
                 $query = "INSERT INTO carts VALUES ('', $product_id,$user_id,1)";
                 $db->insert($query);
-                $modal = new Modal();
                 echo 'Thêm Thành Công Số Lượng Sản Phẩm trong giỏ hàng!';
             }
         }
@@ -73,13 +72,11 @@
             if($result){
                 $query = "UPDATE carts SET carts.amonut  = carts.amonut+$amount WHERE product_id = $product_id and user_id = $user_id ";
                 $db->update($query);
-                $modal = new Modal();
                 echo 'Update Thành Công Số Lượng Sản Phẩm trong giỏ hàng!';
             }
             else{
                 $query = "INSERT INTO carts VALUES ('', $product_id,$user_id,$amount)";
                 $db->insert($query);
-                $modal = new Modal();
                 echo 'Thêm Thành Công Số Lượng Sản Phẩm trong giỏ hàng!';
             }
         }

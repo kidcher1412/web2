@@ -1,11 +1,14 @@
 <?php
      require_once('../model/UserModel.php');
+     require_once('../model/ProductModel.php');
     class Register{
         private $db;
         public function __construct(){
           $this->db = new Database();
        }
        public function index(){
+          $categoryclass = new ProductModel();
+          $categoryData = $categoryclass->getType();
         include('../page/header.php');
         include('../view/RegisterView.php');
         include('../view/BannerView.php');

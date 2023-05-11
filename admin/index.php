@@ -95,6 +95,10 @@
         $class->removeType($_POST["typeID"]);
         exit();
     }
+    if(isset($_POST["action"])&&$_POST["action"]=="backupType"){
+        $class->backupType($_POST["typeID"]);
+        exit();
+    }
     // Brand - stack 
     if(isset($_POST["action"])&&$_POST["action"]=="getBrand"){
         $class->getBrand_ByID($_POST["brandID"]);
@@ -114,6 +118,10 @@
     }
     if(isset($_POST["action"])&&$_POST["action"]=="removeBrand"){
         $class->removeBrand($_POST["brandID"]);
+        exit();
+    }
+    if(isset($_POST["action"])&&$_POST["action"]=="backupBrand"){
+        $class->backupBrand($_POST["brandID"]);
         exit();
     }
     // permission - stack
@@ -262,6 +270,17 @@
     // Thống Kê - stack 
     if(isset($_POST["action"])&&$_POST["action"]=="getThongKe"){
         $class->getValueThongKe();
+        exit();
+    }
+    if(isset($_POST["action"])&&$_POST["action"]=="getThongKever2"){
+        $checkertime = isset($_POST["timer"])?$_POST["timer"]:"";
+        $typeproduct = "";
+        if(isset($_POST["typeproduct"])&&$_POST["typeproduct"]!="all")
+            $typeproduct=$_POST["typeproduct"];
+        $amounter= "";
+        if(isset($_POST["amounter"])&&$_POST["amounter"]!="")
+            $amounter=$_POST["amounter"];
+        $class->getValueThongKe2($checkertime,$typeproduct,$amounter);
         exit();
     }
 ?>

@@ -28,7 +28,7 @@
             else
                 $query = "INSERT INTO accountrefchucnang VALUES ('$user_id','$future_id','".$arrcode[0]."','".$arrcode[1]."','".$arrcode[2]."','1')";
             try {
-                    if($result = $db->update($query))
+                    if($result = $db->insert($query))
                         echo json_encode(array('textRely' => 'success'));
                     else
                         echo json_encode(array('textRely' => 'fail'));
@@ -120,7 +120,7 @@
             }
             $query = "UPDATE quyens SET quyens.name='$name',details='$details' WHERE permission_id='$permission_id'";
             try {
-                if($result = $db->insert($query)){
+                if($result = $db->update($query)){
                     echo json_encode(array('textRely' => 'success'));
                 } else {
                     echo json_encode(array('textRely' => 'fail'));

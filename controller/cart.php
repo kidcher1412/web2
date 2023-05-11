@@ -12,6 +12,8 @@
         $User_id=Session::get("ID_User_login");
         $cartmodel = new Cart();
         $totalPayment = 0;
+        $categoryclass = new ProductModel();
+        $categoryData = $categoryclass->getType();
         $cartData = $cartmodel->getCart_ByUser();
         include('../page/header.php');
         include('../view/CartView.php');

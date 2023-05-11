@@ -316,6 +316,46 @@
             }
         });
     }
+    function BackupLSP(product_type_id) {
+        Swal.fire({
+            type: 'question',
+            title: 'Xác nhận',
+            text: 'Bạn có muốn khôi phục loại sản phẩm và tất cả các sản phẩm thuộc loại sản phẩm này?',
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                type: 'POST',
+            url: './index.php',
+            data: {
+                action: 'backupType',
+                typeID: product_type_id
+            },
+            success: (response) => {
+                Swal.fire({
+                    type: 'success',
+                    title: 'Khôi phục Loại Sản Phẩm Thành Công',
+                    html: response
+                }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi mở khóa sản phẩm',
+                    html: e.responseText
+                });
+            }
+        })
+
+            }
+        });
+    }
     function DangXuat(){
         Swal.fire({
             type: 'question',

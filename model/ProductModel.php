@@ -6,7 +6,7 @@
 
         public function __construct(){
             $db = new Database();
-            $query = "select sanphams.product_id,sanphams.product_type_id,sanphams.name as 'name',sanphams.price as 'price',sanphams.product_type_id,loaisanphams.name as 'type',sanphams.img as 'img',sanphams.use ,sanphams.description,sanphams.amount,sanphams.price,sanphams.status,thuonghieus.brand_id,thuonghieus.name as 'namethuonghieu' from sanphams,loaisanphams,thuonghieus WHERE sanphams.brand_id = thuonghieus.brand_id and sanphams.product_type_id = loaisanphams.product_type_id";
+            $query = "select sanphams.product_id,sanphams.product_type_id,sanphams.name as 'name',sanphams.price as 'price',sanphams.product_type_id,loaisanphams.name as 'type',sanphams.img as 'img',sanphams.use ,sanphams.description,sanphams.amount,sanphams.price,sanphams.status,thuonghieus.brand_id,thuonghieus.name as 'namethuonghieu' from sanphams,loaisanphams,thuonghieus WHERE sanphams.brand_id = thuonghieus.brand_id and sanphams.product_type_id = loaisanphams.product_type_id and loaisanphams.status<>0 and thuonghieus.status<>0";
             $result = $db->select($query);
             while($value = $result->fetch_assoc()) {
                 $product[] = $value; // Thêm mảng kết quả vào mảng output
@@ -206,7 +206,7 @@
         // Type - stack 
         public function addType($name,$description) {
             $db = new Database();
-            $query = "INSERT INTO loaisanphams  VALUES ('', '$name','$description')";
+            $query = "INSERT INTO loaisanphams  VALUES ('', '$name','1','$description')";
             try {
                 if($result = $db->insert($query)){
                     echo json_encode(array('textRely' => 'success'));
@@ -241,10 +241,28 @@
         }
         public function removeType($type_id) {
             $db = new Database();
-            $query = "DELETE FROM loaisanphams WHERE product_type_id='$type_id'";
+            $query = "UPDATE loaisanphams SET status='0'  WHERE product_type_id = '$type_id'";
 
             try {
-                if($result = $db->delete($query)){
+                if($result = $db->update($query)){
+                    echo json_encode(array('textRely' => 'success'));
+                } else {
+                    echo json_encode(array('textRely' => 'fail'));
+                }
+            } catch(mysqli_sql_exception $ex) {
+                if($ex->getCode() == 1062){ // Error code 1062 = Duplicate entry error
+                    echo json_encode(array('textRely' => 'fail'));
+                } else {
+                    throw $ex;
+                }
+            }
+        }
+        public function backupType($type_id) {
+            $db = new Database();
+            $query = "UPDATE loaisanphams SET status='1'  WHERE product_type_id = '$type_id'";
+
+            try {
+                if($result = $db->update($query)){
                     echo json_encode(array('textRely' => 'success'));
                 } else {
                     echo json_encode(array('textRely' => 'fail'));
@@ -260,7 +278,7 @@
         // Brand - stack
         public function addBrand($name) {
             $db = new Database();
-            $query = "INSERT INTO thuonghieus  VALUES ('', '$name')";
+            $query = "INSERT INTO thuonghieus  VALUES ('', '$name','')";
             try {
                 if($result = $db->insert($query)){
                     echo json_encode(array('textRely' => 'success'));
@@ -295,10 +313,28 @@
         }
         public function removeBrand($brand_id) {
             $db = new Database();
-            $query = "DELETE FROM thuonghieus WHERE brand_id='$brand_id'";
+            $query = "UPDATE thuonghieus SET thuonghieus.status=0 WHERE brand_id='$brand_id'";
 
             try {
-                if($result = $db->delete($query)){
+                if($result = $db->update($query)){
+                    echo json_encode(array('textRely' => 'success'));
+                } else {
+                    echo json_encode(array('textRely' => 'fail'));
+                }
+            } catch(mysqli_sql_exception $ex) {
+                if($ex->getCode() == 1062){ // Error code 1062 = Duplicate entry error
+                    echo json_encode(array('textRely' => 'fail'));
+                } else {
+                    throw $ex;
+                }
+            }
+        }
+        public function backupBrand($brand_id) {
+            $db = new Database();
+            $query = "UPDATE thuonghieus SET thuonghieus.status=1 WHERE brand_id='$brand_id'";
+
+            try {
+                if($result = $db->update($query)){
                     echo json_encode(array('textRely' => 'success'));
                 } else {
                     echo json_encode(array('textRely' => 'fail'));
@@ -356,7 +392,7 @@
             $getallquerry=$querytype.$queryname.$querybrand;
             // $finalquerry=$getallquerry==""?"":substr(strstr($getallquerry, 'AND '), 4);
             $finalquerry=$getallquerry==""?"":$getallquerry;
-            $query = "SELECT COUNT(*) as `amount` FROM sanphams WHERE sanphams.status=1 AND sanphams.amount>0 $finalquerry ".$queryfillcost.$querysort;
+            $query = "SELECT COUNT(*) as `amount` FROM sanphams,loaisanphams,thuonghieus WHERE loaisanphams.product_type_id=sanphams.product_type_id  AND thuonghieus.brand_id=sanphams.brand_id AND loaisanphams.status<>0 AND thuonghieus.status<>0 AND sanphams.status=1 AND sanphams.amount>0 $finalquerry ".$queryfillcost.$querysort;
             //lấy số lượng dữ liệu nếu có dữ liệu
             $db = new Database();
             if($result = $db->select($query))
@@ -373,7 +409,7 @@
             sanphams.price, sanphams.status, thuonghieus.brand_id, thuonghieus.name AS 'namethuonghieu' 
             FROM sanphams 
             JOIN loaisanphams ON sanphams.product_type_id = loaisanphams.product_type_id 
-            JOIN thuonghieus ON sanphams.brand_id = thuonghieus.brand_id WHERE sanphams.status=1 AND sanphams.amount>0 ".$finalquerry.$queryfillcost.$querysort.$curentbrowser;
+            JOIN thuonghieus ON sanphams.brand_id = thuonghieus.brand_id WHERE loaisanphams.product_type_id=sanphams.product_type_id AND loaisanphams.status<>0 AND thuonghieus.status<>0 AND sanphams.status=1 AND sanphams.amount>0 ".$finalquerry.$queryfillcost.$querysort.$curentbrowser;
             if($result = $db->select($query)){
                 // thực thi trạng thái có dữ liệu
                 while($value = $result->fetch_assoc()) {
