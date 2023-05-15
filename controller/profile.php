@@ -8,7 +8,9 @@
         public function index() {
             $classBill = new BillModel();
             $ProfileData = $this->getdata_user_login();
-            $BillData=$classBill->getBill_ByUser($ProfileData["kh_user_id"]);
+            // echo json_encode($ProfileData);
+            // $BillData=$classBill->getBill_ByUser($ProfileData["kh_user_id"]);
+            $BillData=$classBill->getBill_ByUserprofile($ProfileData["kh_user_id"]);
             $categoryclass = new ProductModel();
             $categoryData = $categoryclass->getType();
             // echo json_encode($BillData);
@@ -36,6 +38,11 @@
         public function editCustommer($userID, $user, $pass, $full_name, $phone, $mail, $address, $sex, $dateborn){
             $userclass=new User();
             $userclass->editCustommer($userID, $user, $pass, $full_name, $phone, $mail, $address, $sex, $dateborn);
+        }
+        public function editbill($bill_id){
+            $userclass=new BillModel();
+            $userclass->cancelBill($bill_id,4);
+            exit();
         }
     }
 ?>

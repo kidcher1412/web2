@@ -424,6 +424,24 @@ function UpdatePassword(){
                                                         </thead>
                                                         <tbody id='sua_listHD'>";
                                             foreach ($BillData as $value) {
+                                                $statusbill="";
+                                                $buttonaction = "<a href='?typeview=4&billid=".$value["bill_id"]."' target='_blank'><i class='fa fa-eye'></i></a>";
+                                                switch ($value["status"]) {
+                                                    case 1:
+                                                        $statusbill="Đang Xử Lý";
+                                                        break;
+                                                    case 2:
+                                                        $statusbill="Đang Chờ Giao Hàng";
+                                                        break;
+                                                    case 3:
+                                                        $statusbill="Đã Giao Hàng";
+                                                        break;
+                                                    case 4:
+                                                        $statusbill="Đã Hủy Hàng";
+                                                        break;
+                                                }
+                                                if($value["status"]==1)
+                                                    $buttonaction.="<p onclick='cancelbill(".$value["bill_id"].")' style='cursor: pointer;'><i class='fa fa-trash'></i></p>";
                                                 echo "
                                                 <tr>
                                                 <td>".$value["bill_id"]."</td>
@@ -432,8 +450,8 @@ function UpdatePassword(){
                                                     <td>".$value["date_order"]."</td>
                                                 <td>".$value["date_receice"]."</td>
                                                 <td class='p-price first-row'>".$value["total"]."</td>
-<td>Đang xử lý</td>
-                                                <td><a href='?typeview=4&billid=".$value["bill_id"]."' target='_blank'><i class='fa fa-eye'></i></a></td>
+                                                <td>".$statusbill."</td>
+                                                <td>".$buttonaction."</td>
                                             </tr>
                                                 ";
                                             }
@@ -451,6 +469,46 @@ function UpdatePassword(){
             </div>
         </div>
     </section>
+    <script>
+    function cancelbill(bill_id) {
+        Swal.fire({
+            type: 'question',
+            title: 'Xác nhận',
+            text: 'Bạn chắc chắn muốn hủy đơn hàng không, hàng động này sẽ không được hoàn tác',
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: './profile.php',
+                    type: 'post',
+                    data: {
+                        action: 'cancelBill',
+                        bill_id: bill_id,
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'hủy hóa đơn thành công',
+                            html: JSON.parse(response).textRely
+                        }).then((result) => {
+                            if (result.value) {
+                            location.reload();
+                            }
+                        });
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi sửa hóa đơn'
+                        });
+                    }
+                });
+            }
+        });
+    }
+</script>
         ";
     }
     if(isset($_GET["typeview"]) && $_GET["typeview"] ==4 && isset($_GET["billid"])){
@@ -491,7 +549,24 @@ function UpdatePassword(){
                                 <tbody id='sua_listSP'>
                                 ";
                                 $toltalPayment=0;
+                                $statusview='';
+                                    switch ($billView[0]["trangthai"]) {
+                                        case 1:
+                                            $statusview="Đang chờ xử lý hóa đơn";
+                                            break;
+                                        case 2:
+                                            $statusview="Đang chờ vận chuyển";
+                                            break;
+                                        case 3:
+                                            $statusview="Đã Nhận Hàng";
+                                            break;
+                                        case 4:
+                                            $statusview="Đã Hủy Hàng";
+                                            break;
+
+                                    }
                                 foreach ($billView as $key => $value) {
+                                
                                     $toltalPayment+= $value["price"];
                                     echo "
                                         <tr>
@@ -515,7 +590,8 @@ function UpdatePassword(){
                             <div class='col-lg-4 offset-lg-4'>
                                 <div class='proceed-checkout'>
                                     <ul>
-                                        <li class='subtotal'>Tổng sản phẩm <span id='tongsp'>";
+                                        <li class='statusbill'>Trạng Thái Đơn Hàng <span id='statusbill'>".$statusview."</span></li>
+                                        <li class='subtotal'>Tổng số sản phẩm <span id='tongsp'>";
                                         echo count($billView);
                                         echo "</span></li>
                                         <li class='cart-total'>Thành tiền <span id='tongtien'>$toltalPayment đ</span></li>

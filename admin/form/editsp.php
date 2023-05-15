@@ -110,6 +110,7 @@
 
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         var dataProduct;
         var s= "Không tìm thấy Yêu Cầu";
@@ -121,27 +122,182 @@
                 },
                 success: function(responseText) {
                     dataProduct = JSON.parse(responseText);
-                    console.log(dataProduct)
+                    var checkcost;
                     switch (type) {
                         case "product_id":
-                            dataProduct =dataProduct.filter(product => product.product_id === input);
+                            if(input!="")
+                                dataProduct =dataProduct.filter(product => product.product_id == input);
+                            switch (typecheck) {
+                                case "asc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.product_id);
+                                        const nameB = parseInt(b.product_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "desc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.product_id);
+                                        const nameB = parseInt(b.product_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                            }
                             break;
                         case "name":
-                            dataProduct =dataProduct.filter(product => product.name.toLocaleLowerCase().indexOf(input.toLocaleLowerCase())>-1);
+                            if(input!="")
+                                dataProduct =dataProduct.filter(product => product.name.toLocaleLowerCase().indexOf(input.toLocaleLowerCase())>-1);
+                            switch (typecheck) {
+                                case "asc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = a.name.toLocaleLowerCase();
+                                        const nameB = b.name.toLocaleLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "desc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = a.name.toLocaleLowerCase();
+                                        const nameB = b.name.toLocaleLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                            }                           
                             break
                         case "product_type_id":
-                            dataProduct =dataProduct.filter(product => product.product_type_id === input);
+                            if(input!="")
+                                dataProduct =dataProduct.filter(product => product.product_type_id == input);
+                                switch (typecheck) {
+                                    case "asc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.product_type_id);
+                                        const nameB = parseInt(b.product_type_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "desc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.product_type_id);
+                                        const nameB = parseInt(b.product_type_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                            }                            
                             break
                         case "brand_id":
-                            dataProduct =dataProduct.filter(product => product.brand_id === input);
+                            if(input!="")
+                                dataProduct =dataProduct.filter(product => product.brand_id == input);
+                            
+                                switch (typecheck) {
+                                    case "asc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.brand_id);
+                                        const nameB = parseInt(b.brand_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "desc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.brand_id);
+                                        const nameB = parseInt(b.brand_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                            }
                             break
                         case "price":
-                            dataProduct =dataProduct.filter(product => parseInt(product.price) <= input);
+                            if(input!="")
+                                dataProduct =dataProduct.filter(product => parseInt(product.price) >=  parseInt(input));
+                            switch (typecheck) {
+                                case "asc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.price);
+                                        const nameB = parseInt(b.price);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                                case "desc":
+                                    dataProduct =dataProduct.sort((a, b) => {
+                                        const nameA = parseInt(a.price);
+                                        const nameB = parseInt(b.price);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                    break;
+                            }                            
                             break
                         default:
                             break;
                     }
+                    
                     dataProduct.forEach(data => {
+                        var button_edit='';
+                        var button_remove='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditSP(`+ data.product_id +`)'><i class='pe-7s-config'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data.status == 0)
+                            button_remove=`<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Trash' onclick='BackSP(`+ data.product_id +`)'><i class='pe-7s-unlock'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data.status != 0)
+                            button_remove=`<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveSP(`+ data.product_id +`)'><i class='pe-7s-unlock'></i></button>`;
                                 s += `<tr>
                                     <td>`+ data.product_id +`</td>
                                     <td style='width: 80px; height: 80px;'><img src='`+ data.img +`' style='width: 100%; height: 100%;'></td>
@@ -159,15 +315,7 @@
                                         s += `<td>Hết bán</td>`;
                                     }
                         s+=         `<td>
-                                        <button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditSP(`+ data.product_id +`)'><i class='pe-7s-config'></i></button>`;
-                                        if (data.status != 0)
-                                        {
-                                            s += `<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveSP(`+ data.product_id +`)'><i class='pe-7s-lock'></i></button>`;
-                                        }
-                                        else
-                                        {
-                                            s += `<button data-toggle='tooltip' title=' class='pd-setting-ed' data-original-title='Trash' onclick='BackSP(`+ data.product_id +`)'><i class='pe-7s-unlock'></i></button>`;
-                                        }
+`+button_edit+button_remove
                         s +=        `</td>
                                 </tr>`;
                             });

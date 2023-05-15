@@ -194,8 +194,8 @@
                         <ul class="depart-hover">
                             <?php 
                                 foreach ($categoryData as $key => $value) {
-                                    $keyv=$key+1;
-                                    echo "<li><a href='/web2/home/shop.php?type=$keyv'>".$value["name"]."</a></li>";
+                                    if($value["status"]!=0)
+                                        echo "<li><a href='/web2/home/shop.php?type=".$value["product_type_id"]."'>".$value["name"]."</a></li>";
                                 }
                             
                             ?>

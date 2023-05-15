@@ -241,6 +241,10 @@
         $class->getBill_ByID($_POST['bill_id']);
         exit();
     }
+    if(isset($_POST["action"])&&$_POST["action"]=="getinfobill"){
+        $class->getinfoBill_ByID($_POST['bill_id']);
+        exit();
+    }
     if(isset($_POST["action"])&&$_POST["action"]=="getAllBill"){
         $class->getAllBill();
         exit();
@@ -280,6 +284,9 @@
         $amounter= "";
         if(isset($_POST["amounter"])&&$_POST["amounter"]!="")
             $amounter=$_POST["amounter"];
+        $limit= "";
+        if(isset($_POST["limit"])&&$_POST["limit"]!="")
+            $limit=$_POST["limit"];
         $class->getValueThongKe2($checkertime,$typeproduct,$amounter);
         exit();
     }

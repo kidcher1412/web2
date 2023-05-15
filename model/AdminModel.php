@@ -262,6 +262,10 @@
         $classNCC = new BillModel();
         return $classNCC->getBill_ByID($bill_id);
     }
+    public function getinfoBill_ByID($bill_id){
+        $classNCC = new BillModel();
+        return $classNCC->getinfoBill_ByID($bill_id);
+    }
     public function editBill($bill_id,$status,$date_receice){
         $classNCC = new BillModel();
         return $classNCC->editBill($bill_id,$status,$date_receice);

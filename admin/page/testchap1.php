@@ -65,21 +65,25 @@
                   <label style="cursor: pointer;" for="chisobanra">chỉ hiện mức bán ra theo chỉ sổ bán ra của sản phẩm</label>
                   <!-- <input type="checkbox" id="checkbanra" name="checkbanra" onchange="DrawChart()"> -->
                   <br>
+                  <input type="number" style="width: 50px;" id="chisotop" name="chisotop" onchange="DrawChart()" max="20" min="0" placeholder="chỉ số lấy tóp đầu">
+                  <label style="cursor: pointer;" for="chisotop">Hiện top bán chạy</label>
+                  <input type="checkbox" id="chisotopchecker" name="chisotop" onchange="DrawChart()">
+                  <br>
                   <input type="number" style="width: 50px;" id="chisobaodong" name="chisobaodong" onchange="DrawChart()" value="20" placeholder="chỉ số báo động">
                   <label style="cursor: pointer;" for="checksoluong">Hiện Mức Báo Động Kho</label>
                   <input type="checkbox" id="checksoluong" name="checksoluong" onchange="DrawChart()">
                 </div>
-                  <p class="d-flex flex-column">
+                  <!-- <p class="d-flex flex-column">
                       <span>Tổng Số Lượng Sản Phẩm Đã Bán Được: </span>
                       <span class="text-bold text-lg soluongdaban">0</span>
-                  </p>
+                  </p> -->
               </div>
               <div class="card-body table-responsive p-0" style="max-height: 300px;overflow: auto;">
                 <table class="table table-striped table-valign-middle">
                   <thead>
                   <tr>
                     <th>Sản Phẩm</th>
-                    <th>Đã Bán</th>
+                    <th>Số Lượng Đã Bán</th>
                     <th>Tổng Doanh Thu</th>
                     <th>Số Lượng Tồn Kho</th>
                   </tr>
@@ -114,7 +118,7 @@
                   <thead>
                   <tr>
                     <th>Thời Gian Lập Hóa Đơn</th>
-                    <th>Số Lượng các sản phẩm bán ra</th>
+                    <th>Số mặt hành được bán ra</th>
                     <th>Tổng Tiền Hóa Đơn</th>
                     <!-- <th>test</th> -->
                   </tr>
@@ -135,18 +139,21 @@
                   <h3 class="card-title">Thương Hiệu</h3>
                 </div>
               </div>
+              <input onchange="DrawChart()" style="width: 50px;" type="number" name="gettopbrand" id="gettopbrand">
+              <label for="checkgettopbrand">chỉ lấy top thương hiệu bán chạy</label>
+              <input onchange="DrawChart()" type="checkbox" name="checkgettopbrand" id="checkgettopbrand">
               <div class="card-body">
                 <div class="d-flex">
                   <div style="display: flex;" class="d-flex flex-column">
                       <h5>Thương Hiệu Bán Chạy Nhất: </h5>
                       <h5 style="margin-left: 10px; font-weight:bold"  id="bestsalerBrand"></h5>
                   </div>
-                  <p class="ml-auto d-flex flex-column text-right">
+                  <!-- <p class="ml-auto d-flex flex-column text-right">
                     <span class="text-success">
                       <i class="fas fa-arrow-up"></i> 33.1%
                     </span>
                     <span class="text-muted">Since last month</span>
-                  </p>
+                  </p> -->
                 </div>
                 <!-- /.d-flex -->
 
@@ -250,7 +257,8 @@
             action: "getThongKever2",
             timer: geterdate(document.querySelector("#datezoneMin").value)+","+geterdate(document.querySelector("#datezoneMax").value),
             typeproduct: document.querySelector("#select-product").value,
-            amounter:document.querySelector("#chisobanra").value==null?"":document.querySelector("#chisobanra").value
+            amounter:(document.querySelector("#chisobanra").value==""||document.querySelector("#chisobanra").value==0)?"":document.querySelector("#chisobanra").value,
+            limit: ''
         },
         success: function(responseText) {
             // var resultArray = [{monthyear: '04-2023', price: 34145000, countbill: 1},{monthyear: '05-2023', price: 3416000, countbill: 1}];
@@ -290,7 +298,7 @@ document.querySelector("#datezoneMin").value = year+"-01-01";
     const core = DoanhThu;
     const daymax = document.querySelector("#datezoneMax").value;
     const daymin = document.querySelector("#datezoneMin").value;
-    document.querySelector("#chisobanra").value = parseInt(maxCheckAmount)
+    // document.querySelector("#chisobanra").value = parseInt(maxCheckAmount)
 
 
 
@@ -369,14 +377,11 @@ document.querySelector("#datezoneMin").value = year+"-01-01";
         return parseInt(item.soluongton)<=document.getElementById("chisobaodong").value;
       })
     }
-    // if(document.getElementById("checkbanra").checked){
-    //   if(document.getElementById("chisobanra").value!="")
-    //   amountByProductIdOutput = amountByProductIdOutput.filter(item => {
-    //     return parseInt(item.amount)>=parseInt(document.getElementById("chisobanra").value);
-    //   })
-    // }
-amountByProductIdOutput.forEach(element => {
+    if(document.getElementById("chisotopchecker").checked&&document.getElementById("chisotop").value>0)
+      amountByProductIdOutput=amountByProductIdOutput.slice(0,document.getElementById("chisotop").value)
+amountByProductIdOutput.forEach((element,index) => {
     temp +=parseInt(element.price);
+
     document.querySelector("#thongkesoluongban").innerHTML+=`
     <tr>
                       <td>
@@ -401,10 +406,13 @@ amountByProductIdOutput.forEach(element => {
   document.querySelector(".daban").innerHTML = "Tổng số doanh thu: "+parseInt(temp).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   document.querySelector(".sotiendaban").innerHTML = parseInt(temp).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
 
-
+  if(document.getElementById("gettopbrand").value!="" && document.getElementById("checkgettopbrand").checked)
+      aggregatedBrands=aggregatedBrands.slice(0,document.getElementById("gettopbrand").value)
       // var aggregatedBrands = []; // lập trạng thái dữ liệu không có
       labels = aggregatedBrands.map(item => item.name_brand);
       values = aggregatedBrands.map(item => item.total);
+      const highestTotalBrand = aggregatedBrands.reduce((acc, cur) => parseInt(cur.total) > parseInt(acc.total) ? cur : acc).name_brand;
+      document.getElementById("bestsalerBrand").innerHTML=highestTotalBrand
       ctx = document.getElementById('sales-chart').getContext('2d');
       new Chart(ctx, {
         type: 'pie',

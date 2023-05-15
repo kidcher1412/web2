@@ -238,6 +238,7 @@
     }
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         $.ajax({
             type: 'POST',
@@ -253,13 +254,101 @@
                     case "all":
                         break;
                     case "permission_id":
+                        if(input="")
                         data =data.filter(productType => productType.permission_id === input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.permission_id);
+                                        const nameB = parseInt(b.permission_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.permission_id);
+                                        const nameB = parseInt(b.permission_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
+                        
                         break;
                     case "name":
+                        if(input="")
                         data =data.filter(productType => productType.name.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "details":
+                        if(input="")
                         data =data.filter(productType => productType.details.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.details.length;
+                                        const nameB = b.details.length;
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.details.length;
+                                        const nameB = b.details.length;
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -268,12 +357,15 @@
                 if (data.length>0) {
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
+                        var button_edit='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditQuyen(`+ data[i].permission_id +`)'><i class='pe-7s-config'></i></button>`;
                         s += `<tr>
                                     <td>`+ data[i].permission_id +`</td>
                                     <td>`+ data[i].name +`</td>
                                     <td>`+ data[i].details +`</td>
                                     <td>
-                                        <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditQuyen(`+ data[i].permission_id +`)'><i class='pe-7s-config'></i></button>
+                                        `+button_edit+`
                                     </td>
                                 </tr>`;
                     }

@@ -38,6 +38,7 @@
     <script>
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         $.ajax({
             url: './index.php',
@@ -52,22 +53,89 @@
                     case "all":
                         break;
                     case "brand_id":
+                        if(input!="")
                         data =data.filter(productType => productType.brand_id === input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.brand_id);
+                                        const nameB = parseInt(b.brand_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.brand_id);
+                                        const nameB = parseInt(b.brand_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "name":
+                        if(input!="")
                         data =data.filter(productType => productType.name.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
                 }
                 console.log(data);
                     for(let i = 0; i < data.length; ++i){
+                        var button_edit='';
+                        var button_remove='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditBrand(`+ data[i].brand_id +`)'><i class='pe-7s-config'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status == 0)
+                            button_remove="<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' style='background-color: red;' onclick='BackupBrand("+data[i].brand_id+")'><i style='color:white' class='pe-7s-unlock' class='pe-7s-trash'></i></button>";
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status != 0)
+                            button_remove="<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' style='background-color: green;' onclick='RemoveBrand("+data[i].brand_id+")'><i style='color:white' class='pe-7s-unlock' class='pe-7s-trash'></i></button>"
+                      
                         s += `<tr>
                                 <td>`+ data[i].brand_id +`</td>
                                 <td>`+ data[i].name +`</td>
                                 <td>
-                                    <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditBrand(`+ data[i].brand_id +`)'><i class='pe-7s-config'></i></button>
-                                    <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveBrand(`+ data[i].brand_id +`)'><i class='pe-7s-trash'></i></button>
+                                    
+                                    `+button_edit+button_remove+`
                                 </td>
                             </tr>`;
                     }

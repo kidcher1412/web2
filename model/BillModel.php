@@ -9,8 +9,10 @@
             IFNULL(staff_accounts.full_name, '') AS 'nv_full_name'
         FROM 
             hoadons
-        INNER JOIN 
-            accounts ON hoadons.user_kh = accounts.user_id
+        LEFT JOIN 
+            custommer ON hoadons.user_kh = custommer.kh_user_id
+        LEFT JOIN 
+            accounts ON custommer.user_id = accounts.user_id
         LEFT JOIN 
             staff ON hoadons.user_nv = staff.nv_user_id
         LEFT JOIN 
@@ -40,9 +42,20 @@
                 return false;
             return $output;
         }
+        public function getBill_ByUserprofile($user_id){
+            $output = [];
+            foreach ($this->Bill as $value) {
+                if($value["user_kh"]==$user_id)
+                array_push($output,$value);
+                // echo $value["user_kh"];
+            }
+            if(count($output)<1)
+            return false;
+            return $output;
+        }
         public function getBill_ByID($ID){
         $db = new Database();
-        $query = "SELECT chitiethoadons.*, sanphams.img, sanphams.name, sanphams.price,thuonghieus.name AS `tenthuonghieu` FROM hoadons
+        $query = "SELECT chitiethoadons.*, sanphams.img, sanphams.name, sanphams.price,thuonghieus.name AS `tenthuonghieu`,hoadons.status AS `trangthai`  FROM hoadons
         LEFT JOIN chitiethoadons ON hoadons.bill_id = chitiethoadons.bill_id
         LEFT JOIN sanphams ON chitiethoadons.product_id = sanphams.product_id
         LEFT JOIN thuonghieus ON thuonghieus.brand_id = sanphams.brand_id 
@@ -51,6 +64,16 @@
                 while($value = $result->fetch_assoc()) {
                     $bill[] = $value; // Thêm mảng kết quả vào mảng output
                 }
+            return $bill;
+            
+        }
+        public function getinfoBill_ByID($ID){
+        $db = new Database();
+        $query = "SELECT hoadons.status FROM hoadons
+                        WHERE hoadons.bill_id = '$ID'";
+                $result = $db->select($query);
+                $value = $result->fetch_assoc();
+                    $bill = $value["status"]; // Thêm mảng kết quả vào mảng output
             return $bill;
             
         }
@@ -72,6 +95,25 @@
             $result = $db->select($query);
             $staff=$result->fetch_assoc();
             $query = "UPDATE `hoadons` SET `user_nv`='".$staff["nv_user_id"]."',`date_receice`='$date_receice',`status`='$status' WHERE bill_id='$bill_id'";
+            try {
+                if($result = $db->update($query)){
+                        echo json_encode(array('textRely' => 'success'));
+                    
+                } else {
+                    echo json_encode(array('textRely' => 'fail'));
+                }
+            } catch(mysqli_sql_exception $ex) {
+                if($ex->getCode() == 1062){ // Error code 1062 = Duplicate entry error
+                    echo json_encode(array('textRely' => 'fail'));
+                } else {
+                    throw $ex;
+                }
+            }
+            
+        }
+        public function cancelBill($bill_id,$status){
+            $db = new Database();
+            $query = "UPDATE `hoadons` SET `status`='$status' WHERE bill_id='$bill_id'";
             try {
                 if($result = $db->update($query)){
                         echo json_encode(array('textRely' => 'success'));

@@ -37,21 +37,21 @@
                                         <div class='col-md-5'>
                                             <div class='form-group'>
                                                 <label>Tài khoản</label>
-                                                <input type='text' class='form-control' placeholder='Tài khoản' data-val='true' data-val-length='T&#xE0;i kho&#x1EA3;n t&#x1EEB; 3 &#x111;&#x1EBF;n 25 k&#xED; t&#x1EF1;' data-val-length-max='25' data-val-length-min='3' data-val-regex='T&#xE0;i kho&#x1EA3;n ph&#x1EA3;i b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng ch&#x1EEF;' data-val-regex-pattern='^[a-zA-Z][\w]{1,}' data-val-required='T&#xE0;i kho&#x1EA3;n b&#x1EAF;t bu&#x1ED9;c' id='NV_user' maxlength='25' name='NV.user' value='".$AdminData["user"]."'>
+                                                <input type='text' disabled class='form-control' placeholder='Tài khoản' data-val='true' data-val-length='T&#xE0;i kho&#x1EA3;n t&#x1EEB; 3 &#x111;&#x1EBF;n 25 k&#xED; t&#x1EF1;' data-val-length-max='25' data-val-length-min='3' data-val-regex='T&#xE0;i kho&#x1EA3;n ph&#x1EA3;i b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng ch&#x1EEF;' data-val-regex-pattern='^[a-zA-Z][\w]{1,}' data-val-required='T&#xE0;i kho&#x1EA3;n b&#x1EAF;t bu&#x1ED9;c' id='NV_user' maxlength='25' name='NV.user' value='".$AdminData["user"]."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.user' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
                                         <div class='col-md-3'>
                                             <div class='form-group'>
                                                 <label>Mật khẩu</label>
-                                                <input type='password' class='form-control' placeholder='Mật khẩu' data-val='true' data-val-length='M&#x1EAD;t kh&#x1EA9;u t&#x1EEB; 4 &#x111;&#x1EBF;n 25 k&#xED; t&#x1EF1;' data-val-length-max='25' data-val-length-min='4' data-val-required='M&#x1EAD;t kh&#x1EA9;u l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_pass' maxlength='25' name='NV.pass' value=".$AdminData["pass"].">
+                                                <input type='password' disabled class='form-control' placeholder='Mật khẩu' data-val='true' data-val-length='M&#x1EAD;t kh&#x1EA9;u t&#x1EEB; 4 &#x111;&#x1EBF;n 25 k&#xED; t&#x1EF1;' data-val-length-max='25' data-val-length-min='4' data-val-required='M&#x1EAD;t kh&#x1EA9;u l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_pass' maxlength='25' name='NV.pass' value=".$AdminData["pass"].">
                                                 <span class='field-validation-valid' data-valmsg-for='NV.pass' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
                                         <div class='col-md-3'>
                                             <div class='form-group'>
                                                 <label>Nhập lại mật khẩu</label>
-                                                <input type='password' class='form-control' placeholder='Nhập lại mật khẩu' data-val='true' data-val-equalto='Nh&#x1EAD;p l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u kh&#xF4;ng kh&#x1EDB;p v&#x1EDB;i m&#x1EAD;t kh&#x1EA9;u &#x111;&#xE3; nh&#x1EAD;p' data-val-equalto-other='*.pass' id='NV_repass' name='NV.repass' value=".$AdminData["pass"].">
+                                                <input type='password' disabled class='form-control' placeholder='Nhập lại mật khẩu' data-val='true' data-val-equalto='Nh&#x1EAD;p l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u kh&#xF4;ng kh&#x1EDB;p v&#x1EDB;i m&#x1EAD;t kh&#x1EA9;u &#x111;&#xE3; nh&#x1EAD;p' data-val-equalto-other='*.pass' id='NV_repass' name='NV.repass' value=".$AdminData["pass"].">
                                                 <span class='field-validation-valid' data-valmsg-for='NV.repass' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
@@ -61,14 +61,14 @@
                                         <div class='col-md-6'>
                                             <div class='form-group'>
                                                 <label>Họ và tên</label>
-                                                <input type='text' class='form-control' placeholder='Họ và tên' data-val='true' data-val-length='H&#x1ECD; t&#xEA;n t&#x1EEB; 4 &#x111;&#x1EBF;n 100 k&#xED; t&#x1EF1;' data-val-length-max='100' data-val-length-min='4' data-val-required='H&#x1ECD; t&#xEA;n l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_full_name' maxlength='100' name='NV.full_name' value='".$AdminData["full_name"]."'>
+                                                <input type='text' disabled class='form-control' placeholder='Họ và tên' data-val='true' data-val-length='H&#x1ECD; t&#xEA;n t&#x1EEB; 4 &#x111;&#x1EBF;n 100 k&#xED; t&#x1EF1;' data-val-length-max='100' data-val-length-min='4' data-val-required='H&#x1ECD; t&#xEA;n l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_full_name' maxlength='100' name='NV.full_name' value='".$AdminData["full_name"]."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.full_name' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
                                         <div class='col-md-6'>
                                             <div class='form-group'>
                                                 <label>Số điện thoại</label>
-                                                <input type='text' class='form-control' placeholder='Số điện thoại' data-val='true' data-val-regex='S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i ph&#x1EA3;i l&#xE0; s&#x1ED1; v&#xE0; d&#xE0;i t&#x1EEB; 10 &#x111;&#x1EBF;n 11' data-val-regex-pattern='^([\d]{10,11})' data-val-required='S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_phone' name='NV.phone' value='".$AdminData["phone"]."'>
+                                                <input type='text' disabled class='form-control' placeholder='Số điện thoại' data-val='true' data-val-regex='S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i ph&#x1EA3;i l&#xE0; s&#x1ED1; v&#xE0; d&#xE0;i t&#x1EEB; 10 &#x111;&#x1EBF;n 11' data-val-regex-pattern='^([\d]{10,11})' data-val-required='S&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_phone' name='NV.phone' value='".$AdminData["phone"]."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.phone' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@
                                         <div class='col-md-12'>
                                             <div class='form-group'>
                                                 <label>Địa chỉ</label>
-                                                <input type='text' class='form-control' placeholder='Địa chỉ' data-val='true' data-val-required='&#x110;&#x1ECB;a ch&#x1EC9; l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_address' name='NV.address' value='".$AdminData["address"]."'>
+                                                <input type='text' disabled class='form-control' placeholder='Địa chỉ' data-val='true' data-val-required='&#x110;&#x1ECB;a ch&#x1EC9; l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_address' name='NV.address' value='".$AdminData["address"]."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.address' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
@@ -88,14 +88,14 @@
                                         <div class='col-md-4'>
                                             <div class='form-group'>
                                                 <label>Thư điện tử</label>
-                                                <input type='text' class='form-control' placeholder='Thư điện tử' data-val='true' data-val-email='Th&#x1B0; &#x111;i&#x1EC7;n t&#x1EED; kh&#xF4;ng ph&#xF9; h&#x1EE3;p' data-val-required='Th&#x1B0; &#x111;i&#x1EC7;n t&#x1EED; l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_mail' name='NV.mail' value='".$AdminData["mail"]."'>
+                                                <input type='text' disabled class='form-control' placeholder='Thư điện tử' data-val='true' data-val-email='Th&#x1B0; &#x111;i&#x1EC7;n t&#x1EED; kh&#xF4;ng ph&#xF9; h&#x1EE3;p' data-val-required='Th&#x1B0; &#x111;i&#x1EC7;n t&#x1EED; l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_mail' name='NV.mail' value='".$AdminData["mail"]."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.mail' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
                                         <div class='col-md-4'>
                                             <div class='form-group'>
                                                 <label>Ngày sinh</label>
-                                                <input type='date' class='form-control' placeholder='Ngày sinh' data-val='true' data-val-required='Ng&#xE0;y sinh l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_dateborn' name='NV.dateborn' value='".date_format(date_create($AdminData["dateborn"]), "Y-m-d")."'>
+                                                <input type='date' disabled class='form-control' placeholder='Ngày sinh' data-val='true' data-val-required='Ng&#xE0;y sinh l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_dateborn' name='NV.dateborn' value='".date_format(date_create($AdminData["dateborn"]), "Y-m-d")."'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.dateborn' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
@@ -104,13 +104,13 @@
                                                 <label>Giới tính</label>
                                                 <div class='form-check-inline'>
                                                     <label class='form-check-label'>
-                                                        <input $sex_Nam data-val='true' data-val-required='Gi&#x1EDB;i t&#xED;nh l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_sex' name='NV.sex' style='width:63%;' type='radio' value='Nam' /> Nam
+                                                        <input disabled $sex_Nam data-val='true' data-val-required='Gi&#x1EDB;i t&#xED;nh l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_sex' name='NV.sex' style='width:63%;' type='radio' value='Nam' /> Nam
                                                     </label>
                                                 </div>
                                                 
                                                 <div class='form-check-inline'>
                                                     <label class='form-check-label'>
-                                                        <input $sex_Nu id='NV_sex' name='NV.sex' type='radio' value='N&#x1EEF;' /> Nữ
+                                                        <input disabled $sex_Nu id='NV_sex' name='NV.sex' type='radio' value='N&#x1EEF;' /> Nữ
                                                     </label>
                                                 </div>
                                             </div>
@@ -121,14 +121,14 @@
                                         <div class='col-md-6'>
                                             <div class='form-group'>
                                                 <label>Mã quyền</label>
-                                                <input type='text' class='form-control' placeholder='Mã quyền' readonly data-val='true' data-val-required='M&#xE3; quy&#x1EC1;n l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_permission_id' name='NV.permission_id' value='1'>
+                                                <input disabled type='text' class='form-control' placeholder='Mã quyền' readonly data-val='true' data-val-required='M&#xE3; quy&#x1EC1;n l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_permission_id' name='NV.permission_id' value='1'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.permission_id' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
                                         <div class='col-md-6'>
                                             <div class='form-group'>
                                                 <label>Trạng thái</label>
-                                                <input type='text' class='form-control' placeholder='Trạng thái' readonly data-val='true' data-val-regex='Tr&#x1EA1;ng th&#xE1;i l&#xE0; 1 ho&#x1EB7;c 0' data-val-regex-pattern='(1|0)/g' data-val-required='Tr&#x1EA1;ng th&#xE1;i l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_status' name='NV.status' value='1'>
+                                                <input disabled type='text' class='form-control' placeholder='Trạng thái' readonly data-val='true' data-val-regex='Tr&#x1EA1;ng th&#xE1;i l&#xE0; 1 ho&#x1EB7;c 0' data-val-regex-pattern='(1|0)/g' data-val-required='Tr&#x1EA1;ng th&#xE1;i l&#xE0; b&#x1EAF;t bu&#x1ED9;c' id='NV_status' name='NV.status' value='1'>
                                                 <span class='field-validation-valid' data-valmsg-for='NV.status' data-valmsg-replace='true'></span>
                                             </div>
                                         </div>
@@ -160,9 +160,6 @@
                             </div>
                             <hr>
                             <div class='text-center'>
-                                <button href='#' class='btn btn-simple'><i class='fa fa-facebook-square'></i></button>
-                                <button href='#' class='btn btn-simple'><i class='fa fa-twitter'></i></button>
-                                <button href='#' class='btn btn-simple'><i class='fa fa-google-plus-square'></i></button>
 
                             </div>
                         </div>
@@ -193,6 +190,10 @@
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>                          
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0')
                                         echo "<input type='button' value='Thêm sản phẩm' style='float: right;' onclick='AddSP()'/>"; 
@@ -281,10 +282,13 @@
                                         <option value='all'>Tất cả</option>
                                         <option value='product_type_id'>Tìm theo mã loại sản phẩm</option>
                                         <option value='name'>Tìm theo tên loại sản phẩm</option>
-                                        <option value='description'>Tìm theo mô tả loại sản phẩm</option>
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>    
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0')
                                         echo "<input type='button' value='Thêm loại sản phẩm' style='float: right;' onclick='ThemLSP()'/>";
@@ -353,6 +357,10 @@
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>    
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0')
                                         echo "<input type='button' value='Thêm thương hiệu' style='float: right;' onclick='ThemTH()'/>";
@@ -423,7 +431,11 @@ echo "
                                         <option value='details'>Tìm theo chi tiết quyền</option>
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
-                                    <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>   
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>    
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0')
                                         echo "<input type='button' value='Thêm quyền' style='float: right;' onclick='ThemQuyen()'/>";
@@ -488,10 +500,13 @@ echo "
                                         <option value='full_name'>Tìm theo họ tên</option>
                                         <option value='phone'>Tìm theo số điện thoại</option>
                                         <option value='mail'>Tìm theo thư điện tử</option>
-                                        <option value='address'>Tìm theo địa chỉ</option>
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>    
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0'){
                                         echo "<input type='button' value='Thêm nhân viên' style='float: right;' onclick='ThemNV()'/>";
@@ -577,10 +592,13 @@ echo "
                                         <option value='full_name'>Tìm theo họ tên</option>
                                         <option value='phone'>Tìm theo số điện thoại</option>
                                         <option value='mail'>Tìm theo thư điện tử</option>
-                                        <option value='address'>Tìm theo địa chỉ</option>
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>                                        
                                     ";
                                     if($permissionList[$checkpoint]['valueadd']!='0')
                                         echo "<input type='button' value='Thêm Tài Khoản' style='float: right;' onclick='AddKH()'/>";
@@ -622,7 +640,7 @@ echo "
                     ";
                     if($permissionList[$checkpoint]['valueedit']!='0')
                         echo "<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditKH(".$value["user_id"].")'><i class='pe-7s-config'></i></button>";
-                    if($permissionList[$checkpoint]['valueedit']!='0'){
+                    if($permissionList[$checkpoint]['valuedelete']!='0'){
                         echo"
                         <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='";
                         echo $value["status"] == 1? " RemoveKH(".$value["user_id"].")":"BackKH(".$value["user_id"].")";
@@ -742,9 +760,15 @@ echo "
                                         <option value='bill_id'>Tìm theo mã hóa đơn</option>
                                         <option value='user_kh'>Tìm theo mã khách hàng</option>
                                         <option value='user_nv'>Tìm theo mã nhân viên</option>
+                                        <option value='total'>Tìm theo tổng hóa đơn</option>
+                                        <option value='status'>Tìm theo trạng thái hóa đơn</option>
                                     </select>
                                     <input type='text' style='height: 30px;' id='input_search'/>
                                     <input type='button' value='Tìm kiếm' style='height: 30px;' onclick='TimKiem()'/>
+                                    <select style='height: 30px;' id='typecheck'>
+                                        <option value='asc'>tăng dần</option>
+                                        <option value='desc'>giảm dần</option>
+                                    </select>    
                                     <select style='height: 30px; float: right' id='select_trangthai' onchange='TimKiem()'>
                                         <option value='0'>Tất cả</option>
                                         <option value='1'>Đang xử lý</option>

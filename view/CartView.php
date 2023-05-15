@@ -184,7 +184,7 @@
                             if (result.value) {
                             location.reload();
                             }
-                        });;
+                        });
                     },
                     error: function (e) {
                         Swal.fire({
@@ -221,7 +221,11 @@
                             Swal.fire({
                                 type: 'success',
                                 html: response
-                            });
+                            }).then((result) => {
+                            if (result.value) {
+                            location.reload();
+                            }
+                        });
                         },
                         error: function (e) {
                             Swal.fire({

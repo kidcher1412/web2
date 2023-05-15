@@ -40,7 +40,7 @@ $indexItem = $currentPage * $itemsPerPage;
                             else    
                                 echo "
                                         <li>
-                                            <input type='checkbox' class='checkerType' id='" . $demcatelogry . "' style='cursor:pointer' onclick='reloadpageview(0)'>
+                                            <input type='checkbox' class='checkerType' id='" . $value["product_type_id"] . "' style='cursor:pointer' onclick='reloadpageview(0)'>
                                             <label for='type" . $demcatelogry . "' style='cursor:pointer'>" . $value["name"] . "</label>
                                         </li>
                                         ";
@@ -111,8 +111,8 @@ $indexItem = $currentPage * $itemsPerPage;
                             </div>
                         </div>
                     </div>
+                    <a class="filter-btn" onclick="cancel_filterData_ByCost()" style="cursor: pointer; background:#d66363">Hủy Tham số lọc</a>
                     <a class="filter-btn" onclick="filterData_ByCost()" style="cursor: pointer;">Lọc</a>
-                    <a class="filter-btn" onclick="cancel_filterData_ByCost()" style="cursor: pointer; background:red">Hủy Tham số lọc</a>
                 </div>
 
             </div>
@@ -217,7 +217,7 @@ $indexItem = $currentPage * $itemsPerPage;
     let filteredData = [];
     let backdoordata = [];
     var dataView = [];
-    var costercheck = ''
+    var costercheck = '';
     var urlParamscheckerfind = new URLSearchParams(window.location.search);
     if(urlParamscheckerfind.get('SearchString')!=null)
         document.querySelector("#valueSearcher").value=urlParamscheckerfind.get('SearchString');
@@ -227,11 +227,19 @@ $indexItem = $currentPage * $itemsPerPage;
         costercheck = keymin.toString() + "," + keymax.toString();
         reloadpageview(0);
     }
+    const allboxtype = document.querySelectorAll(".checkerType");
+    const idchecker = urlParamscheckerfind.get('type');
+    if(idchecker!="")
+        allboxtype.forEach(element => {
+            if(element.id==parseInt(idchecker)) element.checked=true
+        });
+        
 
     function cancel_filterData_ByCost() {
         costercheck = '';
         $('#minamounts').val(0);
         $('#maxamounts').val(0);
+        slider.noUiSlider.set([0, 2000000]);
         reloadpageview(0);
     }
 
@@ -304,6 +312,11 @@ $indexItem = $currentPage * $itemsPerPage;
             success: function(responseText) {
                 console.log(JSON.parse(responseText));
                 dataView = JSON.parse(responseText);
+                if(dataView.amount>0)
+                    document.querySelector("#TypeSeacher").innerHTML = "Kết Quả Tìm Kiếm: Có "+dataView.amount+ " Kết Quả Được Tìm Thấy"
+                else
+                    document.querySelector("#TypeSeacher").innerHTML = "Kết Quả Tìm Kiếm:"
+                    
                 RenderView(page)
             }
         });
@@ -353,7 +366,8 @@ $indexItem = $currentPage * $itemsPerPage;
                                                                     </div>
                                                                     </div>
     `;
-                document.querySelector(".loading-more").innerHTML = '';
+                if(dataView.amount / itemsPerPage>1){
+                    document.querySelector(".loading-more").innerHTML = '';
                 for (let i = 0; i < dataView.amount / itemsPerPage; i++) {
 
                     document.querySelector(".loading-more").innerHTML += `
@@ -363,6 +377,7 @@ $indexItem = $currentPage * $itemsPerPage;
                                 `;
                 }
                 confillloadmore(Page, (parseInt(dataView.amount / itemsPerPage) + 1));
+                }
             }
         }
         // return document.querySelector(".product-list .row").style="overflow-y: auto;overflow-x: hidden;max-height: 103vh;";
@@ -391,10 +406,11 @@ $indexItem = $currentPage * $itemsPerPage;
         var container = document.querySelector(".loading-more");
         container.innerHTML = "";
         if (currentPage > 0) {
-            container.innerHTML += "<a style='color: #f07c29;' onclick='reloadpageview("+(parseInt(currentPage) - 1)+")'>Prev</a>";
+            container.innerHTML += "<a style='color: #f07c29; cursor: pointer;' onclick='reloadpageview("+(parseInt(currentPage) - 1)+")'>Prev</a>";
         }
         for (var i = minIndex; i <= maxIndex; i++) {
             var node = nodes[i].cloneNode(true);
+            node.style.cursor = "pointer";
             if (i === currentIndex) {
                 node.style.color = "#f07c29";
             }
@@ -402,7 +418,7 @@ $indexItem = $currentPage * $itemsPerPage;
         }
         console.log(currentPage+"  "+ nodes.length)
         if (currentPage < nodes.length - 1) {
-            container.innerHTML += "<a style='color: #f07c29;' onclick='reloadpageview("+(parseInt(currentPage) + 1)+")'>Next</a>";
+            container.innerHTML += "<a style='color: #f07c29; cursor: pointer;' onclick='reloadpageview("+(parseInt(currentPage) + 1)+")'>Next</a>";
         }
     }
     document.addEventListener("DOMContentLoaded", function(event) {

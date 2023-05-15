@@ -164,6 +164,7 @@
     <script>
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         $.ajax({
             url: './index.php',
@@ -179,19 +180,164 @@
                     case "all":
                         break;
                     case "kh_user_id":
+                        if(input!="")
                         data =data.filter(productType => productType.kh_user_id === input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.kh_user_id);
+                                        const nameB = parseInt(b.kh_user_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.kh_user_id);
+                                        const nameB = parseInt(b.kh_user_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "user":
+                        if(input!="")
                         data =data.filter(productType => productType.user.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.user.toLowerCase();
+                                        const nameB = b.user.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.user.toLowerCase();
+                                        const nameB = b.user.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "full_name":
+                        if(input!="")
                         data =data.filter(productType => productType.full_name.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.full_name.toLowerCase();
+                                        const nameB = b.full_name.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.full_name.toLowerCase();
+                                        const nameB = b.full_name.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "phone":
+                        if(input!="")
                         data =data.filter(productType => productType.phone.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.phone.toLowerCase();
+                                        const nameB = b.phone.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.phone.toLowerCase();
+                                        const nameB = b.phone.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "mail":
+                        if(input!="")
                         data =data.filter(productType => productType.mail.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.mail.toLowerCase();
+                                        const nameB = b.mail.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.mail.toLowerCase();
+                                        const nameB = b.mail.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -200,7 +346,15 @@
                 if (data.length>0) {
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
-
+                        var button_edit='';
+                        var button_remove='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditKH(${data[i].user_id})'><i class='pe-7s-config'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status == 0)
+                            button_remove=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='BackKH(${data[i].user_id})'><i class='pe-7s-unlock'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status != 0)
+                            button_remove=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveKH(${data[i].user_id})'><i class='pe-7s-lock'></i></button>`
+                      
                         s +=`<tr>
                                 <td>`+ data[i].kh_user_id +`</td>
                                 <td>`+ data[i].user +`</td>
@@ -217,16 +371,7 @@
                                     s += `<td>Ẩn</td>`;
                                 }
                         s +=    `<td>
-                                    <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditKH(${data[i].user_id})'><i class='pe-7s-config'></i></button>`;
-                                    if (data[i].status != 0)
-                                    {
-                                        s+= `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveKH(${data[i].user_id})'><i class='pe-7s-lock'></i></button>`;
-                                    }
-                                    else
-                                    {
-                                        s+= `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='BackKH(${data[i].user_id})'><i class='pe-7s-unlock'></i></button>`;
-                                    }
-                        s +=    `</td>
+`+button_edit+button_remove+`</td>
                             </tr>`;
                     }
                 }
@@ -401,7 +546,11 @@
                         type: 'success',
                         title: 'Mở khóa tài khoản thành công',
                         html: response
-                    });
+                    }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
                 },
                 error: function (e) {
                     Swal.fire({
@@ -438,7 +587,11 @@
                             type: 'success',
                             title: 'Đã Xóa Thành Công',
                             html: response
-                        });
+                        }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
                     },
                     error: function (e) {
                         Swal.fire({

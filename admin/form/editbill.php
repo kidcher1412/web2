@@ -43,6 +43,7 @@
     function TimKiem(){
         var type = $('#select').val();
         var input = $('#input_search').val();
+        var typecheck = $('#typecheck').val();
         var status = $('#select_trangthai').val();
         $.ajax({
             url: './index.php',
@@ -63,13 +64,164 @@
                     case "all":
                         break;
                     case "bill_id":
+                        if(input!="")
                         data =data.filter(bill => bill.bill_id == input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.bill_id);
+                                        const nameB = parseInt(b.bill_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.bill_id);
+                                        const nameB = parseInt(b.bill_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "user_kh":
+                        if(input!="")
                         data =data.filter(bill => bill.user_kh == input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.user_kh);
+                                        const nameB = parseInt(b.user_kh);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.user_kh);
+                                        const nameB = parseInt(b.user_kh);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "user_nv":
-                        data =data.filter(bill => bill.user_nv === input);
+                        if(input!="")
+                        data =data.filter(bill => bill.user_nv == input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.user_nv);
+                                        const nameB = parseInt(b.user_nv);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.user_nv);
+                                        const nameB = parseInt(b.user_nv);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
+                        break;
+                    case "total":
+                        if(input!="")
+                        data =data.filter(bill => bill.total == input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.total);
+                                        const nameB = parseInt(b.total);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.total);
+                                        const nameB = parseInt(b.total);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
+                        break;
+                    case "status":
+                        if(input!="")
+                        data =data.filter(bill => bill.status == input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.status);
+                                        const nameB = parseInt(b.status);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.status);
+                                        const nameB = parseInt(b.status);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -78,8 +230,14 @@
                     data =data.filter(bill => bill.status==status);
                 }
                 if (data.length>0) {
+                    
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
+                        var button_edit='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1&&data[i].status<3){
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditHD(` + data[i].bill_id
+                                                + `)'><i class='pe-7s-config'></i></button>`;
+                        }
                         if(data[i].user_nv==null)
                             data[i].user_nv ="";
                         s += `<tr>
@@ -102,13 +260,9 @@
                                                 break;
                                         default: break;
                                     }
-                        s +=        `<td>`;
-                                        if(data[i].status < 3){
-                                            s += `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditHD(` + data[i].bill_id
-                                                
-                                                + `)'><i class='pe-7s-config'></i></button>`;
-                                        }
-                                        s += `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='ViewCTHD(`+ data[i].bill_id +`)'><i class='pe-7s-look'></i></button>`;
+                        s +=        `<td>`+button_edit;
+                                        
+                                        s += `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='ViewCTHD(`+ data[i].bill_id+`)'><i class='pe-7s-look'></i></button>`;
                         s +=        `</td>
                                 </tr>`;
                     }
@@ -131,6 +285,16 @@
         $('#title-modal').html('Sửa hóa đơn ' + bill_id);
         $('#bill_id').attr('readonly', true);
         $('#bill_id').val(bill_id);
+        $.ajax({
+        type: 'POST',
+        url: './index.php',
+        data:{
+            action: "getinfobill",
+            bill_id: bill_id
+        },
+        success: function(responseText) {
+            $('#status').val(parseInt(JSON.parse(responseText)));
+        }})
         $('#myModal').modal();
     }
 

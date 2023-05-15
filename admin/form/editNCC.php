@@ -107,28 +107,27 @@
                 if (data != false) {
                     var s = '';
                     for(let i = 0; i < data.length; ++i){
+                        var button_edit='';
+                        var button_remove='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-config'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status == 0)
+                            button_remove=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='BackNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-unlock'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status != 0)
+                            button_remove=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-lock'></i></button>`;
+                      
                         s += `<tr>
                                     <td>`+ data[i].ncc_id +`</td>
                                     <td>`+ data[i].name +`</td>
                                     <td>`+ data[i].address +`</td>
                                     `;
                                     if(data[i].status == 1){
-                                        s += `<td>Hiện</td>`;
+                                        s += `<td>Còn Hợp Tác</td>`;
                                     }
                                     else{
-                                        s += `<td>Ẩn</td>`;
+                                        s += `<td>Tạm Không Hợp Tác</td>`;
                                     }
-                        s +=        `<td>
-                                        <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-config'></i></button>`;
-                                        if (data[i].status != 0)
-                                        {
-                                            s += `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-lock'></i></button>`;
-                                        }
-                                        else
-                                        {
-                                            s += `<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='BackNCC(`+ data[i].ncc_id +`)'><i class='pe-7s-unlock'></i></button>`;
-                                        }
-                        s +=        `</td>
+                        s +="<td>"+button_edit+button_remove+`+"</td>"
                                 </tr>`;
                     }
                     $('#suancc1').html(s);

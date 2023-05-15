@@ -278,7 +278,7 @@
         // Brand - stack
         public function addBrand($name) {
             $db = new Database();
-            $query = "INSERT INTO thuonghieus  VALUES ('', '$name','')";
+            $query = "INSERT INTO thuonghieus  VALUES ('', '$name','1')";
             try {
                 if($result = $db->insert($query)){
                     echo json_encode(array('textRely' => 'success'));
@@ -402,7 +402,7 @@
             //phân trang
             $itemperpage=12;
             $indexbrowser=$page*$itemperpage;
-            $curentbrowser=" LIMIT 12 OFFSET $indexbrowser";
+            $curentbrowser=" LIMIT $itemperpage OFFSET $indexbrowser";
             $query = "SELECT sanphams.product_id, sanphams.product_type_id, sanphams.name AS 'name', 
             sanphams.price AS 'price', sanphams.product_type_id, loaisanphams.name AS 'type', 
             sanphams.img AS 'img', sanphams.use, sanphams.description, sanphams.amount, 

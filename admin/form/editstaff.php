@@ -99,6 +99,7 @@
 <script>
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         $.ajax({
             url: './index.php',
@@ -114,22 +115,195 @@
                     case "all":
                         break;
                     case "user_id":
+                        if(input!="")
                         data =data.filter(productType => productType.nv_user_id === input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.nv_user_id);
+                                        const nameB = parseInt(b.nv_user_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.nv_user_id);
+                                        const nameB = parseInt(b.nv_user_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "permission_id":
+                        if(input!="")
                         data =data.filter(productType => parseInt(productType.permission_id) === parseInt(input));
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.permission_id);
+                                        const nameB = parseInt(b.permission_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.permission_id);
+                                        const nameB = parseInt(b.permission_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "user":
                         data =data.filter(productType => productType.user.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.user.toLowerCase();
+                                        const nameB = b.user.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.user.toLowerCase();
+                                        const nameB = b.user.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "full_name":
+                        if(input!="")
                         data =data.filter(productType => productType.full_name.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.full_name.toLowerCase();
+                                        const nameB = b.full_name.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.full_name.toLowerCase();
+                                        const nameB = b.full_name.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "phone":
+                        if(input!="")
                         data =data.filter(productType => productType.phone.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.phone.toLowerCase();
+                                        const nameB = b.phone.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.phone.toLowerCase();
+                                        const nameB = b.phone.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "mail":
+                        if(input!="")
                         data =data.filter(productType => productType.mail.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.mail.toLowerCase();
+                                        const nameB = b.mail.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.mail.toLowerCase();
+                                        const nameB = b.mail.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -297,7 +471,11 @@
                         type: 'success',
                         title: 'Mở khóa tài khoản thành công',
                         html: response
-                    });
+                    }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
                 },
                 error: function (e) {
                     Swal.fire({
@@ -332,9 +510,13 @@
                     success: (response) => {
                         Swal.fire({
                             type: 'success',
-                            title: 'Đã Xóa Thành Công',
+                            title: 'Đã Khóa Thành Công',
                             html: response
-                        });
+                        }).then((result) => {
+                    if (result.value) {
+                      location.reload();
+                    }
+                  });
                     },
                     error: function (e) {
                         Swal.fire({

@@ -2,6 +2,11 @@
     include "../page/libindex.php";
     require_once('../controller/profile.php');
     Session::checkSession();
+    if (isset($_POST['action'])&&$_POST['action']=="cancelBill") {
+        $class = new Profile();
+        $class->editbill($_POST['bill_id']);
+        exit();
+    }
     if (isset($_POST['action']) &&$_POST['action']=="editaccount") {
         $class = new Profile();
         $id_loged=$class->getdata_user_login();

@@ -44,6 +44,7 @@
     <script>
     function TimKiem(){
         var type = $('#select').val();
+        var typecheck = $('#typecheck').val();
         var input = $('#input_search').val();
         var s="Không Tìm Thấy Sản Phẩm";
         $.ajax({
@@ -58,25 +59,89 @@
                     case "all":
                         break;
                     case "product_type_id":
+                        if(input!="")
                         data =data.filter(productType => productType.product_type_id === input);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.product_type_id);
+                                        const nameB = parseInt(b.product_type_id);
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = parseInt(a.product_type_id);
+                                        const nameB = parseInt(b.product_type_id);
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     case "name":
+                        if(input!="")
                         data =data.filter(productType => productType.name.toLowerCase().indexOf(input.toLowerCase())!=-1);
-                        break;
-                    case "description":
-                        data =data.filter(productType => productType.description.toLowerCase().indexOf(input.toLowerCase())!=-1);
+                        switch (typecheck) {
+                            case "asc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                            case "desc":
+                                data =data.sort((a, b) => {
+                                        const nameA = a.name.toLowerCase();
+                                        const nameB = b.name.toLowerCase();
+                                        if (nameA > nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA < nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                break;
+                        }
                         break;
                     default:
                         break;
                 }
                     for(let i = 0; i < data.length; ++i){
+                        var button_edit='';
+                        var button_remove='';
+                        if(<?php echo $permissionList[$checkpoint]['valueedit'];?> == 1)
+                            button_edit=`<button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditLSP(`+ data[i].product_type_id +`)'><i class='pe-7s-config'></i></button>`;
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status == 0)
+                            button_remove="<button data-toggle='tooltip' title='' class='pd-setting-ed'style='background-color: red;' data-original-title='Trash' onclick='BackupLSP("+data[i].product_type_id+")'><i style='color:white' class='pe-7s-unlock'></i></button>";
+                        if(<?php echo $permissionList[$checkpoint]['valuedelete'];?> == 1&&data[i].status != 0)
+                            button_remove="<button data-toggle='tooltip' title='' class='pd-setting-ed'style='background-color: green;' data-original-title='Trash' onclick='RemoveLSP("+data[i].product_type_id+")'><i style='color:white'class='pe-7s-lock'></i></button>"
+                      
                         s += `<tr>
                                 <td>`+ data[i].product_type_id +`</td>
                                 <td>`+ data[i].name +`</td>
                                 <td>`+ data[i].description +`</td>
                                 <td>
-                                    <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditLSP(`+ data[i].product_type_id +`)'><i class='pe-7s-config'></i></button>
-                                    <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveLSP(`+ data[i].product_type_id +`)'><i class='pe-7s-trash'></i></button>
+                                
+                                    `+button_edit+button_remove+`
                                 </td>
                             </tr>`;
                     }
@@ -90,39 +155,6 @@
                 });
             }            
         });
-        // $.ajax({
-        //     url: '/Admin/Type/TimKiem',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     data: {
-        //         type: type,
-        //         input: input
-        //     },
-        //     success: function (data) {
-        //         if (data != -1) {
-        //             var s = '';
-        //             for(let i = 0; i < data.length; ++i){
-        //                 s += `<tr>
-        //                         <td>`+ data[i].product_type_id +`</td>
-        //                         <td>`+ data[i].name +`</td>
-        //                         <td>`+ data[i].description +`</td>
-        //                         <td>
-        //                             <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Edit' data-toggle='modal' data-target='#myModal' onclick='EditLSP(`+ data[i].product_type_id +`)'><i class='pe-7s-config'></i></button>
-        //                             <button data-toggle='tooltip' title='' class='pd-setting-ed' data-original-title='Trash' onclick='RemoveLSP(`+ data[i].product_type_id +`)'><i class='pe-7s-trash'></i></button>
-        //                         </td>
-        //                     </tr>`;
-        //             }
-        //             $('#sualsp1').html(s);
-        //         }
-        //     },
-        //     error: function (e) {
-        //         Swal.fire({
-        //             type: 'error',
-        //             title: 'Lỗi tìm kiếm loại sản phẩm => TimKiem',
-        //             html: e.responseText
-        //         });
-        //     }
-        // });
     }
 
     function EditLSP(product_type_id) {
@@ -146,7 +178,7 @@
                 error: function (e) {
                     Swal.fire({
                         type: 'error',
-                        title: 'Lỗi mở khóa sản phẩm',
+                        title: 'Lỗi mở khóa loại sản phẩm',
                         html: e.responseText
                     });
                 }
@@ -256,7 +288,7 @@
                 success: (response) => {
                     Swal.fire({
                         type: 'success',
-                        title: 'Sửa loại sản phẩm thành côngm',
+                        title: 'Sửa loại sản phẩm thành công',
                         html: response
                     }).then((result) => {
                     if (result.value) {

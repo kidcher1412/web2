@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 03, 2023 lúc 09:29 AM
--- Phiên bản máy phục vụ: 10.4.27-MariaDB
--- Phiên bản PHP: 8.2.0
+-- Thời gian đã tạo: Th5 15, 2023 lúc 03:46 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,29 +41,29 @@ CREATE TABLE `accountrefchucnang` (
 --
 
 INSERT INTO `accountrefchucnang` (`permission_id`, `chucnang_id`, `valueadd`, `valueedit`, `valuedelete`, `valueread`) VALUES
-(1, 2, 1, 1, 1, 1),
-(1, 3, 1, 1, 1, 1),
-(1, 4, 1, 1, 1, 1),
-(1, 5, 1, 1, 1, 1),
-(1, 6, 1, 1, 1, 1),
-(1, 7, 1, 1, 1, 1),
-(1, 8, 1, 1, 1, 1),
+(1, 2, 0, 0, 0, 1),
+(1, 3, 0, 0, 0, 1),
+(1, 4, 0, 0, 0, 1),
+(1, 5, 0, 0, 0, 0),
+(1, 6, 1, 1, 0, 1),
+(1, 7, 0, 0, 0, 0),
+(1, 8, 0, 0, 0, 0),
 (1, 9, 0, 0, 0, 0),
-(1, 10, 1, 1, 1, 1),
-(1, 11, 1, 1, 1, 1),
-(1, 12, 1, 1, 1, 1),
-(1, 13, 1, 1, 1, 1),
+(1, 10, 0, 0, 0, 0),
+(1, 11, 0, 0, 0, 0),
+(1, 12, 0, 0, 0, 0),
+(1, 13, 0, 0, 0, 0),
 (8, 2, 1, 1, 1, 1),
 (8, 3, 1, 1, 1, 1),
 (8, 4, 1, 1, 1, 1),
 (8, 5, 0, 0, 0, 0),
 (8, 6, 0, 0, 0, 0),
 (8, 7, 0, 0, 0, 0),
-(8, 8, 0, 0, 0, 0),
+(8, 8, 1, 1, 1, 1),
 (8, 9, 1, 1, 1, 1),
 (8, 10, 1, 1, 1, 1),
 (8, 11, 0, 0, 0, 0),
-(8, 12, 0, 0, 0, 0),
+(8, 12, 0, 0, 0, 1),
 (8, 13, 0, 0, 0, 0),
 (9, 2, 0, 0, 0, 1),
 (9, 3, 0, 0, 0, 1),
@@ -75,8 +75,32 @@ INSERT INTO `accountrefchucnang` (`permission_id`, `chucnang_id`, `valueadd`, `v
 (9, 9, 1, 0, 0, 1),
 (9, 10, 0, 0, 0, 0),
 (9, 11, 0, 0, 0, 0),
-(9, 12, 0, 0, 0, 0),
-(9, 13, 0, 0, 0, 0);
+(9, 12, 0, 0, 0, 1),
+(9, 13, 0, 0, 0, 0),
+(10, 2, 0, 0, 0, 1),
+(10, 3, 0, 0, 0, 1),
+(10, 4, 0, 0, 0, 1),
+(10, 5, 0, 0, 0, 0),
+(10, 6, 0, 0, 0, 0),
+(10, 7, 0, 0, 0, 1),
+(10, 8, 0, 0, 0, 1),
+(10, 9, 1, 0, 0, 1),
+(10, 10, 0, 0, 0, 0),
+(10, 11, 0, 0, 0, 0),
+(10, 12, 0, 0, 0, 1),
+(10, 13, 0, 0, 0, 1),
+(11, 2, 0, 1, 1, 1),
+(11, 3, 0, 1, 1, 1),
+(11, 4, 0, 1, 1, 1),
+(11, 5, 1, 1, 1, 1),
+(11, 6, 1, 1, 1, 1),
+(11, 7, 1, 1, 1, 1),
+(11, 8, 1, 1, 1, 1),
+(11, 9, 1, 1, 1, 1),
+(11, 10, 1, 1, 1, 1),
+(11, 11, 1, 1, 1, 1),
+(11, 12, 1, 1, 1, 1),
+(11, 13, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -103,12 +127,14 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`user_id`, `user`, `pass`, `full_name`, `address`, `mail`, `phone`, `sex`, `dateborn`, `admin`, `status`) VALUES
-(1, 'thinh', 'thinh', 'thinh', 'thinh', 'thinh@gmail.com', '0909090909', 'Nữ', '2000-12-30', 0, 0),
-(2, 'thong', 'thong', 'Hoàng Lê Anh Thông', '239 cao dat phuong 1 quan 5', 'thong@gmail.com', '0933647040', 'Nam', '2002-06-30', 0, 1),
-(3, 'admin', 'admin', 'Admin', 'Admin Address', 'admin@gmail.com', '0909999090', 'Nam', '2002-11-11', 1, 1),
-(4, 'testadd', '123123', 'testadd', 'testadd', 'testadd@gmail.com', '0933647040', 'Nam', '2002-12-31', 0, 0),
+(1, 'thinh', '$2y$10$S2WPb0BNr/qA7CzkiuahEOvrKTNgdQLrqGjXzDddod.gvAOZT6boG', 'thinh', 'Nguyễn văn tần phường 3 quận bình thạnh', 'thinh@gmail.com', '0909090909', 'Nam', '2000-12-30', 0, 1),
+(2, 'thong', '$2y$10$STMCbVjYAMV/1xHRVVpQfuS1T0OeHbu.tw92aTz9mCpsEcaeqp9N.', 'Hoàng Lê Anh Thông', 'Phan Văn Trị Phường 2 Quận 3', 'thong@gmail.com', '012312312', 'Nam', '2002-06-30', 0, 1),
+(3, 'admin', '$2y$10$utKyGjdWtXIrBFmciioTx.q.bBbR/g.CxgilRDeT/Q.DGIQCyjYTq', 'Admin', 'Admin Address', 'admin@gmail.com', '0909999090', 'Nam', '2002-11-11', 1, 1),
+(4, 'testadd', '123123', 'testadd1', 'testadd123', 'testadd@gmail.com', '0933647040', 'Nữ', '2002-12-31', 0, 1),
 (5, 'testadd2', '123123', 'testadd2', '239 cao dat phuong 1 quan 5', 'testadd2@gmail.com', '0933647040', 'Nam', '2023-03-23', 0, 1),
-(6, 'quanli', 'quanli', 'Quản Lý', 'Quản Lý Address', 'quanly@gmail.com', '0909999090', 'Nam', '2023-03-24', 1, 1);
+(6, 'quanli', 'quanli', 'Quản Lý', 'Quản Lý Address', 'quanly@gmail.com', '0909999090', 'Nam', '2023-03-24', 1, 1),
+(10, 'quankho', '$2y$10$6fihs0RgyDoak147qH6Vdey9grSyEXvP.ITBBSdliPYiaHwU3fRym', 'Quản Kho', '123123', 'quanly@gmail.com', '012312312', 'Nam', '2023-04-13', 1, 1),
+(11, 'abc123', '$2y$10$pEmFWQ33NoUB7PLr3TaY5enM5TUmGnNknlCDHy6eOfPFOW2LY8Y66', 'abc', 'abc', 'abc@gmail.com', '0933647040', 'Nam', '2019-01-13', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -128,8 +154,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`cart_id`, `product_id`, `user_id`, `amonut`) VALUES
-(59, 1, 1, 8),
-(69, 1, 2, 1);
+(166, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -149,8 +174,29 @@ CREATE TABLE `chitiethoadons` (
 --
 
 INSERT INTO `chitiethoadons` (`bill_id`, `product_id`, `amount`, `bill_key`) VALUES
-(4, 6, 1, 7),
-(4, 34, 2, 8);
+(13, 2, 2, 30),
+(13, 4, 2, 31),
+(13, 211, 3, 32),
+(13, 216, 5, 33),
+(14, 38, 1, 34),
+(15, 9, 7, 35),
+(15, 8, 1, 36),
+(16, 38, 2, 37),
+(16, 42, 1, 38),
+(16, 44, 1, 39),
+(16, 48, 1, 40),
+(16, 66, 1, 41),
+(16, 69, 1, 42),
+(17, 2, 2, 43),
+(17, 54, 1, 44),
+(17, 55, 1, 45),
+(17, 58, 1, 46),
+(18, 2, 2, 47),
+(18, 3, 1, 48),
+(19, 2, 8, 49),
+(20, 2, 1, 50),
+(21, 8, 1, 51),
+(23, 56, 7, 52);
 
 -- --------------------------------------------------------
 
@@ -202,7 +248,8 @@ INSERT INTO `custommer` (`kh_user_id`, `money`, `user_id`) VALUES
 (1, '10', 1),
 (2, '10', 2),
 (3, '10', 4),
-(4, '0', 5);
+(4, '10', 5),
+(15, '0', 11);
 
 -- --------------------------------------------------------
 
@@ -221,9 +268,21 @@ CREATE TABLE `heros` (
 --
 
 INSERT INTO `heros` (`id_hero`, `slogent`, `img`) VALUES
-(1, 'Tích cực mua hàng để AnhThong dào cóa', '../asset/img/hero-1.jpg'),
+(1, 'Tháng Tư Xinh Tươi, Được Mười Người Yêu', '../asset/img/hero-1.jpg'),
 (2, 'Deal Cực Khủng Rinh Quà Liền Tay', '../asset/img/hero-2.jpg'),
-(3, 'Mua Sắm Không Lo Hết Tiền', '../asset/img/hero-3.jpg');
+(3, 'Mua Sắm Không Lo Hết Tiền', '../asset/img/hero-3.jpg'),
+(9, 'Tích cực mua hàng để AnhThong dào cóa', '../uploads/svg-triangle-letter-logo-design-with-triangle-shape-svg-triangle-logo-design-monogram-svg-triangle-logo-template-with-red-color-svg-triangular-logo-simple-elegant-and-luxurious-logo-svg-vector.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hinhminhhoas`
+--
+
+CREATE TABLE `hinhminhhoas` (
+  `product_id` int(11) NOT NULL,
+  `img_more` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -248,7 +307,16 @@ CREATE TABLE `hoadons` (
 --
 
 INSERT INTO `hoadons` (`bill_id`, `user_kh`, `user_nv`, `phone`, `address`, `date_receice`, `date_order`, `total`, `status`) VALUES
-(4, 2, 1, '0909090909', '239 Cao Đạt phường 4 quận 5 Thành Phố Hồ Chí Minh', '2023-03-31 01:43:24', '2023-03-09 00:00:00', '887000', '3');
+(13, 2, 1, '012312312', 'Phan Văn Trị Phường 2 Quận 5', '', '25-02-2023', '34145000', '2'),
+(14, 2, 1, '012312312', 'Phan Văn Trị Phường 2 Quận 5', '', '07-03-2023', '261000', '4'),
+(15, 2, 1, '012312312', 'Phan Văn Trị Phường 2 Quận 3', '08-05-2023', '08-04-2023', '3416000', '3'),
+(16, 2, 1, '012312312', 'địa chỉ khác', '13-05-2023', '12-05-2023', '3430000', '3'),
+(17, 1, NULL, '0909090909', 'Nguyễn văn tần phường 3 quận bình thạnh', '', '13-05-2023', '1386999', '4'),
+(18, 15, NULL, '0933647040', 'abc', '', '13-05-2023', '589000', '4'),
+(19, 15, NULL, '0933647040', 'abc', '', '13-05-2023', '1336000', '1'),
+(20, 15, NULL, '0933647040', 'abc', '', '13-05-2023', '167000', '1'),
+(21, 15, NULL, '0933647040', 'abc', '', '13-05-2023', '714000', '1'),
+(23, 15, NULL, '0933647040', 'abc', '', '15-05-2023', '5320000', '1');
 
 -- --------------------------------------------------------
 
@@ -259,6 +327,7 @@ INSERT INTO `hoadons` (`bill_id`, `user_kh`, `user_nv`, `phone`, `address`, `dat
 CREATE TABLE `loaisanphams` (
   `product_type_id` int(255) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -266,13 +335,14 @@ CREATE TABLE `loaisanphams` (
 -- Đang đổ dữ liệu cho bảng `loaisanphams`
 --
 
-INSERT INTO `loaisanphams` (`product_type_id`, `name`, `description`) VALUES
-(1, 'Trang điểm', 'Gồm set trang điểm mắt, mặt, môi'),
-(2, 'Dưỡng da', 'Gồm bộ rửa mặt, mặt nạ, dưỡng ẩm, dưỡng môi, chống nắng'),
-(3, 'Cơ thể', 'Gồm dưỡng thể, sữa tắm'),
-(4, 'Dưỡng tóc', 'Gồm dầu gội, dầu xả, tạo kiểu, dưỡng tóc'),
-(5, 'Cọ và phụ kiện', 'Gồm cọ và bọt biển'),
-(6, 'Nước hoa', 'Gồm những loại nước hoa cao cấp tới trung bình');
+INSERT INTO `loaisanphams` (`product_type_id`, `name`, `status`, `description`) VALUES
+(1, 'Trang điểm', 0, 'Gồm set trang điểm mắt, mặt, môi'),
+(2, 'Dưỡng da', 1, 'Gồm bộ rửa mặt, mặt nạ, dưỡng ẩm, dưỡng môi, chống nắng'),
+(3, 'Cơ thể', 1, 'Gồm dưỡng thể, sữa tắm'),
+(4, 'Dưỡng tóc', 1, 'Gồm dầu gội, dầu xả, tạo kiểu, dưỡng tóc'),
+(5, 'Cọ và phụ kiện', 1, 'Gồm cọ và bọt biển'),
+(6, 'Nước hoa', 1, 'Gồm những loại nước hoa cao cấp tới trung bình'),
+(7, 'Thể Loại Teset', 0, 'đây là testcase trước khi demo');
 
 -- --------------------------------------------------------
 
@@ -295,9 +365,8 @@ INSERT INTO `nccs` (`ncc_id`, `name`, `status`, `address`) VALUES
 (1, 'SaiGon Cores', 1, 'Hồ Chí Minh'),
 (2, 'Thường Mạnh Group', 1, 'Cần Thơ'),
 (3, 'Công Thương Quận', 1, 'Trà Vinh'),
-(4, 'DSla', 1, 'Tây Ninh'),
-(5, 'Chang Xing Shou', 0, 'Trung Quốc'),
-(6, 'Cty Thông', 1, 'Thông');
+(4, 'DSla', 0, 'Tây Ninh'),
+(5, 'Chang Xing Shou', 0, 'Trung Quốc');
 
 -- --------------------------------------------------------
 
@@ -316,9 +385,11 @@ CREATE TABLE `quyens` (
 --
 
 INSERT INTO `quyens` (`permission_id`, `name`, `details`) VALUES
-(1, 'Admin', 'qlSanPham-qlQuyen-qlNhanVien-qlKhachHang-qlNCC-qlNhapHang-qlMaketing-qlSupport-qlThongKe'),
-(8, 'Quản Lý Kho', 'qlSanPham-qlHoaDon-qlNhapHang'),
-(9, 'Nhân Viên Bán Hàng', 'xemSanPham-xemKhachHang-xemNCC-qlHoaDon');
+(1, 'Admin', 'xemSanPham-qlNhanVien'),
+(8, 'Quản Lý Kho', 'qlSanPham-qlNCC-qlHoaDon-qlNhapHang-qlSupport'),
+(9, 'Nhân Viên Bán Hàng', 'xemSanPham-xemKhachHang-xemNCC-qlHoaDon-qlSupport'),
+(10, 'Nhân Viên Trực Quầy', 'xemSanPham-xemKhachHang-xemNCC-qlHoaDon-qlSupport-xemThongKe'),
+(11, 'fullquyen', 'qlSanPham-qlQuyen-qlNhanVien-qlKhachHang-qlNCC-qlHoaDon-qlNhapHang-qlMaketing-qlSupport-qlThongKe');
 
 -- --------------------------------------------------------
 
@@ -344,20 +415,20 @@ CREATE TABLE `sanphams` (
 --
 
 INSERT INTO `sanphams` (`product_id`, `product_type_id`, `brand_id`, `name`, `amount`, `price`, `description`, `use`, `img`, `status`) VALUES
-(1, 1, 1, 'Lustre Eyeshadow Base', '36', 200000, 'Sản phẩm kem lót mắt Lustre có kết cấu mỏng, nhẹ, dễ dàng tán đều trên mí mắt. Lustre Eyeshadow Base giúp giữ màu phấn mắt lên màu chuẩn và lâu trôi, đồng thời bảo vệ mắt khỏi hiện tượng bị kích ứng', 'Bôi một lớp mỏng sản phẩm lên vùng mí mắt bằng ngón tay hoặc cọ có đầu mỏng như Lustre Pro Makeup Brush E103 Eyeshadow Brush.Tán đều sản phẩm, đợi đến khi khô mới sử dụng phấn mắt', '../asset/image/sp0.jpg', 1),
-(2, 1, 2, 'GOLDEN ROSE EYESHADOW PRIMER', '50', 167000, 'Golden Rose là một nhãn hiệu của tập đoàn Erkul Cosmetics đến từ Thổ Nhĩ Kỳ. Đây là một trong những tập đoàn mỹ phẩm lớn tại Châu Âu và nổi tiếng trên thế giới, chuyên cung cấp các loại mỹ phẩm chăm sóc mặt, mắt, môi, nails, tóc…. Erkul Cosmetics cũng nằm', 'Sử dụng trước khi make-up mắt, tán trực tiếp lên da - Sau khi được thoa lên mắt, kem primer sẽ mau chóng khô lại tạo finish trong mờ, vì vậy bạn đừng lo ngại mí mắt sẽ trở nên trơn bóng', '../asset/image/sp1.jpg', 1),
-(3, 1, 3, 'Smashbox Cosmetics', '50', 255000, 'Smashbox Cosmetics là kem lót dành cho mắt thách thức mọi phong cách trang điểm mắt từ nhẹ nhàng, đơn giản đến ombre, màu khói cầu kỳ quyến rũ, sản phẩm vẫn giữ nguyên màu mắt đẹp của bạn suốt ngày dài. Kết cấu dạng kem mịn, có độ bám cao và dễ tán đều tr', 'Sau khi dưỡng ẩm, lấy một lượng kem vừa đủ tán đều khắp bầu mắt trước khi sử dụng phấn mắt.', '../asset/image/sp2.jpg', 1),
-(4, 1, 4, 'Nars Smudge Proof Eyeshadow', '50', 510000, 'Thiết kế vỏ hộp là tông đen và sản phẩm có thiết kế cũng khá đơn giản với tông trắng đen chủ đạo nhưng rất dễ nhìn ra đặc trưng nhờ sự nổi bật của Logo NARS.Có nhiều tone màu lựa chọn chứa ít nhũ nhẹ. Kết cấu của kem lót khá mịn, như kiểu kem dưỡng.', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt', '../asset/image/sp3.jpg', 1),
+(1, 1, 1, 'Lustre Eyeshadow Base', '1', 200000, 'Sản phẩm kem lót mắt Lustre có kết cấu mỏng, nhẹ, dễ dàng tán đều trên mí mắt. Lustre Eyeshadow Base giúp giữ màu phấn mắt lên màu chuẩn và lâu trôi, đồng thời bảo vệ mắt khỏi hiện tượng bị kích ứng', 'Bôi một lớp mỏng sản phẩm lên vùng mí mắt bằng ngón tay hoặc cọ có đầu mỏng như Lustre Pro Makeup Brush E103 Eyeshadow Brush.Tán đều sản phẩm, đợi đến khi khô mới sử dụng phấn mắt', '../asset/image/sp0.jpg', 1),
+(2, 1, 2, 'GOLDEN ROSE EYESHADOW PRIMER', '0', 167000, 'Golden Rose là một nhãn hiệu của tập đoàn Erkul Cosmetics đến từ Thổ Nhĩ Kỳ. Đây là một trong những tập đoàn mỹ phẩm lớn tại Châu Âu và nổi tiếng trên thế giới, chuyên cung cấp các loại mỹ phẩm chăm sóc mặt, mắt, môi, nails, tóc…. Erkul Cosmetics cũng nằm', 'Sử dụng trước khi make-up mắt, tán trực tiếp lên da - Sau khi được thoa lên mắt, kem primer sẽ mau chóng khô lại tạo finish trong mờ, vì vậy bạn đừng lo ngại mí mắt sẽ trở nên trơn bóng', '../asset/image/sp1.jpg', 1),
+(3, 1, 3, 'Smashbox Cosmetics', '46', 255000, 'Smashbox Cosmetics là kem lót dành cho mắt thách thức mọi phong cách trang điểm mắt từ nhẹ nhàng, đơn giản đến ombre, màu khói cầu kỳ quyến rũ, sản phẩm vẫn giữ nguyên màu mắt đẹp của bạn suốt ngày dài. Kết cấu dạng kem mịn, có độ bám cao và dễ tán đều tr', 'Sau khi dưỡng ẩm, lấy một lượng kem vừa đủ tán đều khắp bầu mắt trước khi sử dụng phấn mắt.', '../asset/image/sp2.jpg', 1),
+(4, 1, 4, 'Nars Smudge Proof Eyeshadow', '48', 510000, 'Thiết kế vỏ hộp là tông đen và sản phẩm có thiết kế cũng khá đơn giản với tông trắng đen chủ đạo nhưng rất dễ nhìn ra đặc trưng nhờ sự nổi bật của Logo NARS.Có nhiều tone màu lựa chọn chứa ít nhũ nhẹ. Kết cấu của kem lót khá mịn, như kiểu kem dưỡng.', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt', '../asset/image/sp3.jpg', 1),
 (5, 1, 5, 'BH Cosmetics Solar Flare', '50', 688000, 'Bảng phấn mắt BH Cosmetics Solar Flare là một trong ba bảng màu mắt chủ đề Vũ trụ của BH Cosmetics. Bộ sưu tập các gam màu vũ trụ lung linh, ấm áp giúp cho đôi mắt của bạn thêm tỏa sáng rực rỡ. Bảng màu nhiều sắc thái từ màu nude lì đến những gam màu nhũ ', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt. Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp4.jpg', 1),
-(6, 1, 5, 'BH Cosmetics Mini Zodiac', '50', 437000, 'BH Cosmetics Mini Zodiac Aquarius là bảng màu mắt lấy cảm hứng từ cung Bào Bình trong 12 cung hoàng đạo. 9 tông màu khác nhau với một loạt các sắc màu như nâu, nâu đậm, xanh...đến tông màu trắng ánh bạc giúp khơi gợi nên sự quyến rũ độc đáo của riêng bạn.', ' Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp5.jpg', 1),
+(6, 1, 5, 'BH Cosmetics Mini Zodiac', '49', 437000, 'BH Cosmetics Mini Zodiac Aquarius là bảng màu mắt lấy cảm hứng từ cung Bào Bình trong 12 cung hoàng đạo. 9 tông màu khác nhau với một loạt các sắc màu như nâu, nâu đậm, xanh...đến tông màu trắng ánh bạc giúp khơi gợi nên sự quyến rũ độc đáo của riêng bạn.', ' Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp5.jpg', 1),
 (7, 1, 5, 'BH Cosmetics Blushing In Bali', '50', 669000, 'BH Cosmetics Blushing in Bali là bảng phấn má hồng và tạo khối lấy cảm hứng từ những hòn đảo đầy nắng của Bali. 6 màu phấn hồng và tạo khối của BH Cosmetic cho bạn tất cả những gam màu bạn tìm kiếm. Gồm 2 ô phấn má hồng tươi tắn dễ phối màu và 4 ô tạo khố', 'Chỉ lấy một lượng vừa đủ bám trên bề mặt lông của cọ dùng để đánh má hồng.Bắt đầu bằng cách đặt phấn má lên điểm cao nhất của gò má. Sau đó mỉm cười và quét cọ từ đỉnh ngoài của gò má (phía gần mũi) nhẹ nhàng kéo hướng về phía thái dương. Dùng cọ tán đều ', '../asset/image/sp6.jpg', 1),
-(8, 1, 5, 'BH Cosmetics Zodiac Love Signs', '50', 714000, 'Bảng phấn mắt BH Cosmetics Zodiac Love Signs với 25 màu bao gồm 12 màu phấn mắt lì mịn, 12 màu phấn nhũ và 1 màu highlight sáng sẽ giúp đôi mắt bạn trông rực rỡ và sống động hơn bao giờ hết. 24 màu mắt trải dài từ các gam màu nóng đến lạnh và các màu thuộ', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp7.jpg', 1),
-(9, 1, 5, 'BH Cosmetics Foil Eyes', '50', 386000, 'Bảng màu mắt BH Cosmetics Foil Eyes gồm 28 gam màu metallic (kim loại); đây là một bộ sưu tập của sự hoàn hảo; đa chiều và đa sắc tố kim loại. Nó là sự kết hợp của tone neutrals và các loại đá ngọc trai, đá thạch anh lấp lánh đến màu ánh khói đem đến cho ', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp8.jpg', 1),
+(8, 1, 5, 'BH Cosmetics Zodiac Love Signs', '46', 714000, 'Bảng phấn mắt BH Cosmetics Zodiac Love Signs với 25 màu bao gồm 12 màu phấn mắt lì mịn, 12 màu phấn nhũ và 1 màu highlight sáng sẽ giúp đôi mắt bạn trông rực rỡ và sống động hơn bao giờ hết. 24 màu mắt trải dài từ các gam màu nóng đến lạnh và các màu thuộ', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp7.jpg', 1),
+(9, 1, 5, 'BH Cosmetics Foil Eyes', '42', 386000, 'Bảng màu mắt BH Cosmetics Foil Eyes gồm 28 gam màu metallic (kim loại); đây là một bộ sưu tập của sự hoàn hảo; đa chiều và đa sắc tố kim loại. Nó là sự kết hợp của tone neutrals và các loại đá ngọc trai, đá thạch anh lấp lánh đến màu ánh khói đem đến cho ', 'Dùng cọ lấy lượng phấn mắt vừa đủ và đánh lên bầu mắt.Có thể làm ẩm cọ trước khi lấy phấn để màu lên đậm hơn.Có thể pha trộn màu để tạo nên màu mắt thật khác biệt.', '../asset/image/sp8.jpg', 1),
 (10, 1, 6, 'M.A.C EYE SHADOW X 15', '50', 3088000, 'M.A.C EYE SHADOW X 15 là bảng màu mắt gồm các tông màu bán chạy nhất của MAC gồm 15 ô màu full size với chất phấn vô cùng mịn mượt cho khả năng lên màu chuẩn, cực dễ tán trên da và có độ bám màu lên đến 12 tiếng.Thiết kế sang trọng, các tone màu dễ ', 'Nên dùng kem lót mắt trước khi sử dụng phấn mắt.Tán đều nhẹ nhàng, khéo léo bằng cọ trang điểm mắt.Sử dụng các tông màu từ sáng đến đậm để tạo khối và tạo điểm nổi bật.Bảo quản nơi khô ráo, thoáng mát. Tránh ánh nắng trực tiếp và nhiệt độ cao', '../asset/image/sp9.jpg', 1),
 (11, 1, 7, 'MISSHA Signature Velvet Art', '50', 544000, 'Phấn mắt MISSHA Signature Velvet Art với tông màu cổ điển, là sự lựa chọn tuyệt vời cho các cô nàng theo phong cách retro.Tính năng làm đẹp của loại phẩn này rất hiệu quả. Sử dụng sản phẩm để trang điểm cho đôi mắt sẽ đem lại cho bạn cảm giác mềm mại, mịn', 'Màu phấn nền được dùng đầu tiên, các bạn phủ đều phấn mắt nền lên rộng gấp 2 lần mí mắt.Màu phấn chính (nhấn) được dùng tiếp theo, loại phấn này chỉ nên vẽ khoảng môt nửa mí mắt để tạo điểm nhấn chính cho đôi mắt. Màu phấn viền thì chỉ để vẽ viền mắt theo', '../asset/image/sp10.jpg', 1),
 (12, 1, 1, 'LUSTRE PRO Volume Waterproof', '50', 240000, 'LUSTRE PRO Volume Waterproof sử dụng công nghệ đột phá Micro Fiber, giúp bao phủ từng sợi mi. Chỉ với một lần chuốt nhẹ, MLUSTRE PRO Volume Waterproof sẽ khiến hàng mi dày và cong vút tự nhiên. LUSTRE PRO Volume Waterproof không gây cảm giác nặng trĩu và ', ' Lăn chai giữa 2 lòng bàn tay để làm ấm Mascara (giúp Mascara ít bị vón cục khi sử dụng).Lấy cọ ra khỏi chai và lau bớt phần Mascara dư bằng khăn giấy.Chải cọ theo đường Ziczac từ chân mi đến ngọn mi.Sau khi chuốt qua một lượt, đợi khoảng 10 giây cho khô ', '../asset/image/sp11.jpg', 1),
 (13, 1, 8, 'Innisfree Skinny Longlongcar', '50', 190000, 'Innisfree Skinny Longlongcar với đầu chải mi được thiết kế đặc biệt hình tam giác cực nhỏ chỉ có 2.5mm, giúp chổi chạm đến từng sợi mi nhỏ và ngắn nhất, chuốt tận được sâu trong chân mi. Nhờ thiết kế độc đáo này mà khi chuốt mi ít bị vón và dính các sợi m', 'Chải từ phía gốc mi theo hướng đi lên theo đường ziczac.Dựng đứng đầu chải và chải thêm phần mi ngắn ở đầu và đuôi mắt.Chải thêm phần lông mi dưới giúp mắt trông to và quyến rũ hơn', '../asset/image/sp12.jpg', 1),
-(14, 1, 9, ' Sisley So Intense Mascara Deep', '50', 1359000, 'Sisley So Intense Mascara Deep mang đến cho bạn một hàng mi dày và dài trông thấy với hiệu quả ngay tức thì. Công thức độc đáo được bổ sung các peptide giàu vitamin giúp mi dày, dài và chắc khỏe hơn qua từng ngày. Các sắc tố màu siêu tinh khiết cung cấp m', 'Nên bâm mi trước để có hàng mi cong đẹp tự nhiên. Ấn nhẹ đầu chải vào gốc lông mi và nhẹ nhàng chuốt về phía ngọn, lặp lại động tác cho đến khi có được màu mascara bạn muốn.', '../asset/image/sp13.jpg', 1),
+(14, 1, 9, 'Sisley So Intense Mascara Deep', '50', 1359000, 'Sisley So Intense Mascara Deep mang đến cho bạn một hàng mi dày và dài trông thấy với hiệu quả ngay tức thì. Công thức độc đáo được bổ sung các peptide giàu vitamin giúp mi dày, dài và chắc khỏe hơn qua từng ngày. Các sắc tố màu siêu tinh khiết cung cấp m', 'Nên bâm mi trước để có hàng mi cong đẹp tự nhiên. Ấn nhẹ đầu chải vào gốc lông mi và nhẹ nhàng chuốt về phía ngọn, lặp lại động tác cho đến khi có được màu mascara bạn muốn.', '../asset/image/sp13.jpg', 1),
 (15, 1, 10, 'Arcancil Paris Lash Hysteria', '50', 395000, 'Arcancil Paris Lash Hysteria là sản phẩm trang điểm được ưa chuộng của Arcancil Paris với đầu cọ 360 độ cùng với nhiều dưỡng chất tốt giúp cho mỗi sợi lông mi đều được bao phủ bởi lớp mascara mà không bị vón cục, khô mi khi trang điểm trong thời gian dài.', 'Chải Mascara bằng cách xoay cọ từ gốc đến đầu lông mi, bắt đầu từ góc bên trong đến góc ngoài của mắt. Áp dụng nhiều lớp đến khối lượng mong muốn: một lớp kem duy nhất cho một kết quả tự nhiên, nhiều lớp kem cho khối lượng tối đa và hiệu ứng lông mi dày c', '../asset/image/sp14.jpg', 1),
 (16, 1, 7, 'MISSHA THE STYLE 4D MASCARA', '50', 153000, 'Thành phần chủ yếu là Botanical wax giúp bạn dễ dàng có hàng mi cong, đầy quyến rũ mà không hề có cảm giác cộm, bết dính hay vón cục. Đồng thời, cung cấp các dưỡng chất giúp bảo vệ làn mi luôn khỏe mạnh.Cây chải mi được thiết kế rất đặc biệt và tinh tế vớ', 'Lăn Chải mi The Style 4D Missha giữa 2 lòng bàn tay để làm ấm mascara để mascara ít bị vón cục khi sử dụng.Kẹp mi tạo dáng mi.Dùng mascara lấy đầu chổi, chải nhẹ nhàng lớp thứ nhất để khô.Có thể tiếp tục dùng kẹp mí tạo dáng lần 2, chải mascara lần 2, lặ', '../asset/image/sp15.jpg', 1),
 (17, 1, 1, 'Lustre PRO Eyelash Curler', '50', 200000, 'Kẹp mi Lustre uốn cong mi mắt mà không làm gãy/rụng mi. Chất liệu thép không gỉ và cao su mềm giúp kẹp mi hoạt động lâu dài và không làm gãy mi.', 'Mở kẹp mi, đặt vào mí mắt theo đường cong tự nhiên của mí mắt sao cho lông mi nằm trên phần cao su của kẹp. Bấm nhẹ nhàng từ 2-3 lần. Bỏ kẹp mi, chuốt mascara. Lặp lại cho tới khi mi đạt độ cong mong muốn.', '../asset/image/sp16.jpg', 1),
@@ -381,7 +452,7 @@ INSERT INTO `sanphams` (`product_id`, `product_type_id`, `brand_id`, `name`, `am
 (35, 1, 18, 'Muji Mild Eye Make Up Remover', '50', 388000, 'Muji Mild Eye Make Up Remover nhẹ nhàng loại bỏ trang điểm mắt trên da nhạy cảm như mắt và môi mà không có cảm giác dính. Sản phẩm có thành phần chính là dầu ô liu, chiết xuất Chamomile, chiết xuất lá đào, thành phần dưỡng ẩm tự nhiên và thành phần dưỡng ', 'Lắc đều trước khi sử dụng.Cho một lượng sản phẩm cỡ đồng xu lên cotton pad, áp trên vùng trang điểm mắt và môi trong vài giây rồi lau nhẹ nhàng.', '../asset/image/sp34.jpg', 1),
 (36, 1, 19, 'Lashfood Conditioning Collagen Lash Primer', '50', 230000, '...', 'Bôi lên mặt', '../asset/image/sp35.jpg', 1),
 (37, 1, 20, 'Milk Hydra Grip Primer', '50', 150000, 'Kem lót cấp ẩm MILK MAKEUP Hydro Grip Primer là một sản phẩm kem lót không chứa silicone - thành phần dễ gây nên tắc nghẽn lỗ chân lông, kem dạng gel trong đầy dưỡng chất sẽ giúp da ẩm mịn hơn trông thấy.Kem lót đem lại cảm giác như bạn đang sử dụng một l', 'Bôi lên mặt', '../asset/image/sp36.jpg', 1),
-(38, 1, 7, 'MISSHA VELVET FINISH CUSHION', '50', 261000, 'Khi thoa lên da, phấn có lớp mỏng nhẹ tự nhiên không bệt dính khó chịu trong quá trình dùng. Không tạo độ bóng dầu sau khi sử dụng. Tạo cho bạn sự thoải mái khí sử dụng điện thoại mà không còn dấu dính lại.MISSHA VELVET FINISH CUSHION ẽ là lớp màng bảo vệ', 'Lấy 1 lượng vừa vủ, dùng bông tẩy trang đánh đều lên bề mặt da.', '../asset/image/sp37.jpg', 1),
+(38, 1, 7, 'MISSHA VELVET FINISH CUSHION', '53', 261000, 'Khi thoa lên da, phấn có lớp mỏng nhẹ tự nhiên không bệt dính khó chịu trong quá trình dùng. Không tạo độ bóng dầu sau khi sử dụng. Tạo cho bạn sự thoải mái khí sử dụng điện thoại mà không còn dấu dính lại.MISSHA VELVET FINISH CUSHION ẽ là lớp màng bảo vệ', 'Lấy 1 lượng vừa vủ, dùng bông tẩy trang đánh đều lên bề mặt da.', '../asset/image/sp37.jpg', 1),
 (39, 1, 8, 'Innisfree My To Go Cushion', '50', 554000, 'Chứa chiết xuất từ bột tro núi lửa đảo Jeju, hoa atiso và axit hyaluronic giúp tăng cường độ ẩm cho da.Chỉ số chống nắng cao với SPF35 PA++, mang đến cho người sử dụng cảm giác an toàn trong khi tham gia vào những hoạt động ngoài trời.Có độ che phủ tốt lấ', 'Ấn nút lấy sản phẩm ở rìa hộp cho đến khi lấy được lượng sản phẩm cần dùng, dùng bông cushion phân bổ đều phấn nước trên dĩa tán rồi bắt đầu dặm phấn nước lên mặt.Dặm nhẹ nhàng phấn từ phần má rồi di chuyển đến vùng trung tâm mặt.Gấp đôi bông cushion lại ', '../asset/image/sp38.jpg', 1),
 (40, 1, 21, 'Laneige Layering Cover Cushion', '50', 665000, 'Độ che phủ cao và hiệu quả bền màu.Mang lại làn da đều màu và sáng hồng tự nhiên.Có thể điều chỉnh lớp nền lì hoặc sáng bóng tùy theo sở thích của bạn.Sản phẩm mang lại cảm giác ẩm mượt, không gây cảm giác khô, căng da.Chức năng kép: Kem che khuyết điểm: ', 'Sử dụng kem che khuyết điểm để che phủ những vùng da không hoàn hảo.Giúp gương mặt trở nên tươi sáng và hồng hào hơn khi dử dụng LANEIGE Layering Cover Cushion lên toàn bộ gương mặt', '../asset/image/sp39.jpg', 1),
 (41, 1, 22, 'Guerlain Lingerie De Peau Liquid', '50', 1729000, 'Guerlain Lingerie De Peau Liquid là kem nền có khả năng che phủ hoàn hảo với chất kem lỏng dễ dàng lướt và tán đều trên da, công thức nhẹ nhàng cho lớp che phủ trông tự nhiên như làn da thứ hai, hòa quyện hoàn hảo với làn da bạn. Sản phẩm mang trong mình ', 'Trước khi dùng kem nền, bạn nên thoa một loại kem lót.Khi thoa kem nền, dùng mũi làm trọng tâm, thoa từ trong ra ngoài. Thoa vùng rộng trước, vùng hẹp sau. Sau đó, thoa thật nhẹ nhàng cho vùng mắt và môi.Nên thoa kem mỏng ở những vùng da quanh mắt và miện', '../asset/image/sp40.jpg', 1),
@@ -397,11 +468,11 @@ INSERT INTO `sanphams` (`product_id`, `product_type_id`, `brand_id`, `name`, `am
 (51, 1, 26, 'SILKYGIRL MAGIC BB OIL CONTROL', '50', 136000, 'Phấn phủ Silkygirl Magic BB Oil chứa chiết xuất cây cọ lùn và trái hồng giúp thấm hút dầu thừa và hạn chế tiết bã nhờn, cho làn da mịn màng, không còn bóng dầu đồng thời còn có khả năng chống nắng với SPF 45/PA++ giúp bảo vệ làn da dưới tác hại của ánh mặ', 'Dùng bông phấn đi kèm lấy một lượng phấn vừa đủ và dặm đều lên mặt. Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao', '../asset/image/sp50.jpg', 1),
 (52, 1, 8, 'Innisfree No Sebum Mineral Powder', '50', 171000, 'Phấn Phủ Bột kiềm dầu Innisfree No Sebum Mineral Powder là loại phấn khoáng dạng bột, chiết xuất 100% từ bạc hà và hạt ngọc trai, có khả năng hút dầu rất tốt. Phấn có tông màu trong suốt nên rất dễ tiệp với tất cả các tone da và không ảnh hưởng đến tông m', 'Sau khi áp dụng lớp kem nền và hoàn thiện gương mặt bằng kem che khuyết điểm, bạn có thể sử dụng phấn phủ để kết thúc lớp nền. Dùng cọ nhúng bột phấn. Lắc nhẹ cọ cho bột phấn thừa rơi ra sau đó nhẹ nhàng phủ bầu mắt và toàn bộ gương mặt cho thật đều.', '../asset/image/sp51.jpg', 1),
 (53, 1, 7, 'MISSHA The Style Defining Blusher', '50', 240000, 'Màu sắc hợp thời trang, tạo đường nét sống động tự nhiên cho khuôn mặt. Công nghệ Air Jet Mill tạo hạt phấn mịn đều bám nhẹ nhàng và mềm mại trên làn da và giữ cho lớp trang điểm bền màu. Chứa bột màu ngọc bích cho đường nét xinh đẹp tự nhiên, kết hợp cùn', 'Dùng sau khi hoàn thành các bước trang điểm. Dùng bông phấn hoặc cọ chấm một lượng vừa đủ để tạo độ hồng tự nhiên', '../asset/image/sp52.jpg', 1),
-(54, 1, 1, 'lustre Pro Eyeshadow Magnetic Palette Case', '50', 157999, 'Một bảng màu phấn mắt 16 khe trống, có thể đổ lại, có thể được tùy chỉnh với chảo phấn mắt yêu thích của bạn.', 'Sử dụng bảng màu để lưu trữ Luster Pro Pressed của bạn.', '../asset/image/sp53.jpg', 1),
-(55, 1, 27, 'Refillable Makeup Case', '50', 245000, 'Tùy chỉnh hộp trang điểm của riêng bạn.', 'Tùy chỉnh hộp trang điểm của riêng bạn.', '../asset/image/sp54.jpg', 1),
-(56, 1, 1, 'LUSTRE MAKEUP', '50', 760000, 'Tùy chỉnh hộp trang điểm của riêng bạn.', 'Tùy chỉnh hộp trang điểm của riêng bạn.', '../asset/image/sp55.jpg', 1),
+(54, 1, 1, 'lustre Pro Eyeshadow Magnetic Palette Case', '49', 157999, 'Một bảng màu phấn mắt 16 khe trống, có thể đổ lại, có thể được tùy chỉnh với chảo phấn mắt yêu thích của bạn.', 'Sử dụng bảng màu để lưu trữ Luster Pro Pressed của bạn.', '../asset/image/sp53.jpg', 1),
+(55, 1, 27, 'Refillable Makeup Case', '49', 245000, 'Tùy chỉnh hộp trang điểm của riêng bạn.', 'Tùy chỉnh hộp trang điểm của riêng bạn.', '../asset/image/sp54.jpg', 1),
+(56, 1, 1, 'LUSTRE MAKEUP', '43', 760000, 'Tùy chỉnh hộp trang điểm của riêng bạn.', 'Tùy chỉnh hộp trang điểm của riêng bạn.', '../asset/image/sp55.jpg', 1),
 (57, 1, 9, 'Sisley Phyto-Blush Eclat - 4 Pinky Rose', '50', 250000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp56.jpg', 1),
-(58, 1, 28, 'Aritaum Sugar Ball Cushion Blusher - 01 Posy Pink', '50', 650000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp57.jpg', 1),
+(58, 1, 28, 'Aritaum Sugar Ball Cushion Blusher - 01 Posy Pink', '49', 650000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp57.jpg', 1),
 (59, 1, 29, 'LOVE 3CE CHEEK MAKER', '50', 76000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp58.jpg', 1),
 (60, 1, 1, 'Lustre PRO Pressed Blush - Pink Nude', '50', 279000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp59.jpg', 1),
 (61, 1, 30, 'Kaleido Cosmetics Astrolight - Electric', '50', 740000, 'Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.', 'Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.', '../asset/image/sp60.jpg', 1),
@@ -556,12 +627,12 @@ INSERT INTO `sanphams` (`product_id`, `product_type_id`, `brand_id`, `name`, `am
 (208, 5, 5, 'BH Cosmetics Sculpt and Blend 2 – 10 Piece Brush Set', '50', 511000, 'là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu th', 'Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn', '../asset/image/sp207.jpg', 1),
 (209, 5, 51, 'Lixibox Konjac Sponge', '50', 861000, 'là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu th', 'Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn', '../asset/image/sp208.jpg', 1),
 (210, 5, 43, 'Bông mút trang điểm The Duo Rain Drop', '50', 468000, 'là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu th', 'Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn', '../asset/image/sp209.jpg', 1),
-(211, 6, 53, 'Foellie Inner Perfume - Bijou', '50', 2227000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp210.jpg', 1),
+(211, 6, 53, 'Foellie Inner Perfume - Bijou', '47', 2227000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp210.jpg', 1),
 (212, 6, 54, 'Jo Malone Oud & Bergamot Intense 9ml', '50', 1754000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp211.jpg', 1),
 (213, 6, 54, 'Jo Malone Dark & Amber & Ginger Lily 9ml', '50', 2442000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp212.jpg', 1),
 (214, 6, 54, 'Jo Malone Tuberose & Angelica 9ml', '50', 1278000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp213.jpg', 1),
-(215, 6, 54, 'Jo Malone London Cologne Intense - Myrrh & Tonka 9ml', '50', 1422000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp214.jpg', 1),
-(216, 6, 55, 'Diptyque LOmbre dans lEau Set', '50', 5222000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp215.jpg', 1),
+(215, 6, 54, 'Jo Malone London Cologne Intense - Myrrh & Tonka 9ml', '44', 1422000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp214.jpg', 1),
+(216, 6, 55, 'Diptyque LOmbre dans lEau Set', '45', 5222000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp215.jpg', 1),
 (217, 6, 54, 'Jo Malone London Velvet Rose & Oud Cologne Intense', '50', 522000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp216.jpg', 1),
 (218, 6, 57, 'LE LABO FLEUR DORANGER 27 eau de parfum - 50ml', '50', 2652000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp217.jpg', 1),
 (219, 6, 57, 'LE LABO AMBRETTE 9 eau de parfum - 50ml', '50', 532000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp218.jpg', 1),
@@ -573,9 +644,7 @@ INSERT INTO `sanphams` (`product_id`, `product_type_id`, `brand_id`, `name`, `am
 (225, 6, 55, 'Diptyque Eau Duelle Eau de Toilette - 50 ml', '50', 2242000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp224.jpg', 1),
 (226, 6, 56, 'ATELIER COLOGNE Iris Rebelle Cologne Absolue Pure Perfume - 10 ml', '50', 1225000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp225.jpg', 1),
 (227, 6, 54, 'Jo Malone Lime Basil & Mandarin Cologne 30ml', '50', 3266000, 'Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của ', 'Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng', '../asset/image/sp226.jpg', 1),
-(229, 1, 3, 'thong', '23', 100000, 'thong', 'thong', '../uploads/tkb.png', 1),
-(230, 1, 13, 'thong', '39', 2147483647, '1111', '1111', '../uploads/326055982_2374745402703209_3893378573403450045_n.jpg', 1),
-(231, 1, 1, 'ThongTest', '123', 123, '123', '123', '../uploads/sale.jpg', 1);
+(228, 3, 20, 'Sửa Tắm Anh Thông', '12', 2300000, 'sửa tấm test', 'sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test sửa tấm test ', '../uploads/test.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -596,8 +665,9 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`nv_user_id`, `accede`, `salary`, `user_id`, `permission_id`) VALUES
-(1, '2023-1-11 00:00:00', '20000000', 3, 1),
-(3, '2023-1-11 00:00:00', '20000000', 6, 8);
+(1, '2023-1-11 00:00:00', '20000000', 3, 11),
+(2, '2023-1-11 00:00:00', '20000000', 6, 10),
+(3, '2023-1-11 00:00:00', '20000000', 10, 8);
 
 -- --------------------------------------------------------
 
@@ -607,71 +677,73 @@ INSERT INTO `staff` (`nv_user_id`, `accede`, `salary`, `user_id`, `permission_id
 
 CREATE TABLE `thuonghieus` (
   `brand_id` int(255) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `thuonghieus`
 --
 
-INSERT INTO `thuonghieus` (`brand_id`, `name`) VALUES
-(1, 'LUSTRE MAKEUP'),
-(2, 'Golden Rose'),
-(3, 'SmashBox'),
-(4, 'Medium'),
-(5, 'BH Cosmetics'),
-(6, 'M.A.C Cosmetics'),
-(7, 'Missha'),
-(8, 'Innisfree'),
-(9, 'Sisley Paris'),
-(10, 'ARCANCIL PARIS'),
-(11, 'Buxom Cosmetics'),
-(12, 'Isehan'),
-(13, 'MacQueen'),
-(14, 'Eclipse Colours'),
-(15, 'PETITE LAEL'),
-(16, 'THE BROWGAL'),
-(17, 'Dolly Wink'),
-(18, 'Muji'),
-(19, 'United States'),
-(20, 'Milk'),
-(21, 'Laneige'),
-(22, 'Guerlain'),
-(23, 'Elizabeth Arden'),
-(24, 'L’oreal'),
-(25, 'Eglips'),
-(26, 'SILKYGIRL'),
-(27, 'STATISFY'),
-(28, 'Aritaum'),
-(29, '3CE'),
-(30, 'Kaleido Cosmetics'),
-(31, 'Stila Cosmetics'),
-(32, 'Cover Fx'),
-(33, 'Anastasia Beverly Hills'),
-(34, 'Dior'),
-(35, 'E.L.F'),
-(36, 'Yves Saint Laurent'),
-(37, 'Nars'),
-(38, 'Lime Crime'),
-(39, 'Tarte'),
-(40, 'Byphasse'),
-(41, 'Clinique'),
-(42, 'Bioderma'),
-(43, 'DHC'),
-(44, 'Mad Hippie'),
-(45, 'Huxley'),
-(46, 'Simple'),
-(47, 'Dinky Touch'),
-(48, 'Shiro Waki Hime'),
-(49, 'Pixi'),
-(50, 'Naruko'),
-(51, 'LIXIBOX'),
-(52, 'UK'),
-(53, 'Foellie'),
-(54, 'Jo Malone London'),
-(55, 'Diptyque'),
-(56, 'Atelier Cologne'),
-(57, 'LE LABON');
+INSERT INTO `thuonghieus` (`brand_id`, `name`, `status`) VALUES
+(1, 'LUSTRE MAKEUP', 1),
+(2, 'Golden Rose', 1),
+(3, 'SmashBox', 1),
+(4, 'Medium', 1),
+(5, 'BH Cosmetics', 1),
+(6, 'M.A.C Cosmetics', 1),
+(7, 'Missha', 1),
+(8, 'Innisfree', 1),
+(9, 'Sisley Paris', 1),
+(10, 'ARCANCIL PARIS', 1),
+(11, 'Buxom Cosmetics', 1),
+(12, 'Isehan', 1),
+(13, 'MacQueen', 1),
+(14, 'Eclipse Colours', 1),
+(15, 'PETITE LAEL', 1),
+(16, 'THE BROWGAL', 1),
+(17, 'Dolly Wink', 1),
+(18, 'Muji', 1),
+(19, 'United States', 1),
+(20, 'Milk', 1),
+(21, 'Laneige', 1),
+(22, 'Guerlain', 1),
+(23, 'Elizabeth Arden', 1),
+(24, 'L’oreal', 1),
+(25, 'Eglips', 1),
+(26, 'SILKYGIRL', 1),
+(27, 'STATISFY', 1),
+(28, 'Aritaum', 1),
+(29, '3CE', 1),
+(30, 'Kaleido Cosmetics', 1),
+(31, 'Stila Cosmetics', 1),
+(32, 'Cover Fx', 1),
+(33, 'Anastasia Beverly Hills', 1),
+(34, 'Dior', 1),
+(35, 'E.L.F', 1),
+(36, 'Yves Saint Laurent', 1),
+(37, 'Nars', 1),
+(38, 'Lime Crime', 1),
+(39, 'Tarte', 1),
+(40, 'Byphasse', 1),
+(41, 'Clinique', 1),
+(42, 'Bioderma', 1),
+(43, 'DHC', 1),
+(44, 'Mad Hippie', 1),
+(45, 'Huxley', 1),
+(46, 'Simple', 1),
+(47, 'Dinky Touch', 1),
+(48, 'Shiro Waki Hime', 1),
+(49, 'Pixi', 1),
+(50, 'Naruko', 1),
+(51, 'LIXIBOX', 1),
+(52, 'UK', 1),
+(53, 'Foellie', 1),
+(54, 'Jo Malone London', 1),
+(55, 'Diptyque', 1),
+(56, 'Atelier Cologne', 1),
+(57, 'LE LABON', 1),
+(66, 'Thương Hiệu Test', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -724,6 +796,12 @@ ALTER TABLE `custommer`
 --
 ALTER TABLE `heros`
   ADD PRIMARY KEY (`id_hero`);
+
+--
+-- Chỉ mục cho bảng `hinhminhhoas`
+--
+ALTER TABLE `hinhminhhoas`
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Chỉ mục cho bảng `hoadons`
@@ -781,19 +859,19 @@ ALTER TABLE `thuonghieus`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `cart_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `cart_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT cho bảng `chitiethoadons`
 --
 ALTER TABLE `chitiethoadons`
-  MODIFY `bill_key` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `bill_key` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT cho bảng `chucnang`
@@ -805,43 +883,43 @@ ALTER TABLE `chucnang`
 -- AUTO_INCREMENT cho bảng `custommer`
 --
 ALTER TABLE `custommer`
-  MODIFY `kh_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `kh_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `heros`
 --
 ALTER TABLE `heros`
-  MODIFY `id_hero` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_hero` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `hoadons`
 --
 ALTER TABLE `hoadons`
-  MODIFY `bill_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `bill_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `loaisanphams`
 --
 ALTER TABLE `loaisanphams`
-  MODIFY `product_type_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `product_type_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `nccs`
 --
 ALTER TABLE `nccs`
-  MODIFY `ncc_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ncc_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `quyens`
 --
 ALTER TABLE `quyens`
-  MODIFY `permission_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `permission_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `sanphams`
 --
 ALTER TABLE `sanphams`
-  MODIFY `product_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `product_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT cho bảng `staff`
@@ -853,7 +931,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT cho bảng `thuonghieus`
 --
 ALTER TABLE `thuonghieus`
-  MODIFY `brand_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `brand_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -885,6 +963,12 @@ ALTER TABLE `chitiethoadons`
 --
 ALTER TABLE `custommer`
   ADD CONSTRAINT `custommer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`user_id`);
+
+--
+-- Các ràng buộc cho bảng `hinhminhhoas`
+--
+ALTER TABLE `hinhminhhoas`
+  ADD CONSTRAINT `hinhminhhoas_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `sanphams` (`product_id`);
 
 --
 -- Các ràng buộc cho bảng `hoadons`

@@ -76,7 +76,7 @@
                                 <div class="quantity">
                                     <div class="pro-qty">
                                         <span class='dec qtybtn'>-</span>
-                                        <input type="number" value="1" min='1' max='<?php echo $productInfo["amount"];?>' oninput='if(this.value><?php echo $productInfo["amount"];?>) this.value=<?php echo $productInfo["amount"];?>' maxlength="10" id="slsp">
+                                        <input type="number" value="1" min='1' max='<?php echo $productInfo["amount"];?>' oninput='if(this.value><?php echo $productInfo["amount"];?>) this.value=<?php echo $productInfo["amount"];?>; if(this.value=="") this.value=1; ' maxlength="10" id="slsp">
                                         <span class='inc qtybtn'>+</span>
                                     </div>
                                     <a class="primary-btn pd-cart" onclick="ShopThemSPAjax(<?php echo $productInfo['product_id'];
@@ -231,4 +231,5 @@ thumbnails.forEach(thumbnail => {
     setActiveThumbnail(thumbnail);
   });
 });
+
 </script>

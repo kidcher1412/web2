@@ -288,6 +288,11 @@
             $bill = $user->getBill_ByID($bill_id);
             echo json_encode($bill);
         }
+        public function getinfoBill_ByID($bill_id){
+            $user = new Admin;
+            $bill = $user->getinfoBill_ByID($bill_id);
+            echo json_encode($bill);
+        }
         public function getAllBill(){
             $user = new Admin;
             $bill = $user->getBill();

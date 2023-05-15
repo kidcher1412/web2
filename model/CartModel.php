@@ -154,7 +154,7 @@
         }
         public function checkoutCart_getAddress($user_id,$address){
             $db = new Database();
-            $query = "SELECT carts.*,custommer.kh_user_id,sanphams.name,sanphams.img,sanphams.price,sanphams.amount as `exist`,sanphams.status,(sanphams.price*carts.amonut) AS `total`,accounts.phone
+            $query = "SELECT  carts.*,custommer.kh_user_id,sanphams.name,sanphams.img,sanphams.price,sanphams.amount as `exist`,sanphams.status,(sanphams.price*carts.amonut) AS `total`,accounts.phone
             FROM carts,accounts,sanphams,custommer
             WHERE carts.user_id=accounts.user_id 
             AND carts.product_id=sanphams.product_id 
